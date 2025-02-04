@@ -4,7 +4,6 @@
   --secondary-bg-color: #E38859;
 }
 
-
 h1 {
   font-size: 2em;
   margin: 0.1em;
@@ -15,87 +14,28 @@ h3 {
   margin: 0.1em;
 }
 
-nav {
-  background-color: var(--primary-bg-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-}
-
-.nav-quizapp-brand {
-  color: var(--primary-text-color);
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   font-family: 'Nunito', sans-serif;
-  font-size: 1.5em;
-  font-weight: 700;
-  padding: 20px;
+
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-family: 'Nunito', sans-serif;
+
+
   padding: 0;
-}
-
-.slogan {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1em;
-}
-
-.new-quiz {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-}
-
-.new-quiz-form {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  width: 30vw;
-}
-
-#quiz-title {
-  padding: 0.5em;
-  margin: 0.5em;
-  height: 40px;
-}
-
-#quiz-privacy {
-  padding: 0.5em;
-  margin: 0.5em;
-  height: 40px;
-
-}
-
-#new-quiz-button {
-  padding: 0.5em;
-  margin: 0.5em;
-  height: 40px;
-  font-family: 'Nunito', sans-serif;
-  background-color: var(--secondary-bg-color);
-  color: var(--primary-text-color);
-  font-weight: 700;
-
-}
-
-
-
-footer {
-  background-color: var(--primary-bg-color);
-  color: var(--primary-text-color);
-  font-family: 'Nunito', sans-serif;
-  position: fixed;         /* Fix the footer at the bottom */
-  bottom: 0;               /* Set it at the very bottom of the page */
-  left: 0;                 /* Align to the left side */
-  width: 100%;             /* Make the footer span the full width */
-  padding: 0px;
-  text-align: center;
-  font-size: 15px;
 }

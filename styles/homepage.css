@@ -1,0 +1,46 @@
+
+.slogan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1em;
+}
+
+.new-quiz {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.new-quiz-form {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  width: 30vw;
+}
+
+#quiz-title {
+  padding: 0.5em;
+  margin: 0.5em;
+  height: 40px;
+}
+
+#quiz-privacy {
+  padding: 0.5em;
+  margin: 0.5em;
+  height: 40px;
+
+}
+
+#new-quiz-button {
+  padding: 0.5em;
+  margin: 0.5em;
+  height: 40px;
+  font-family: 'Nunito', sans-serif;
+  background-color: var(--secondary-bg-color);
+  color: var(--primary-text-color);
+  font-weight: 700;
+
+}
+
