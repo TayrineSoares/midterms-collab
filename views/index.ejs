@@ -30,9 +30,34 @@
     <span class="nav-quizapp-brand">QuizApp</span>
   </nav>
 
-
+  <!-- Main content -->
   <div class ="content">
-    <h1>Have fun! 🥔</h1>
+
+    <h2>Create, Challenge, Share.</h2>
+    <h3>The easiest way to make quizzes for free.</h3>
+
+    <section class="new-quiz">
+      <h2>Start a new Quiz!</h2>
+    </section>
+
+    <!-- NOT SURE WHAT THE ACTION SHOULD BE HERE -->
+    <form class="new-quiz-form" action="/" method="POST">
+
+      <textarea name="quiz-title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
+
+    <!-- Quiz Privacy (Select Dropdown) -->
+    <select name="quiz-privacy" id="quiz-privacy" required aria-label="Quiz Privacy">
+      <option value="" disabled selected>Quiz Privacy</option>
+      <option value="public">Public</option>
+      <option value="private">Private</option>
+    </select>
+
+    <button type="submit" id="new-quiz-button">Create new quiz</button>
+
+
+    </form>
+
+
   </div>
 
 
