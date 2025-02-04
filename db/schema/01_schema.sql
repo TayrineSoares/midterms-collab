@@ -1,0 +1,45 @@
+DROP TABLE IF EXISTS quizes CASCADE;
+DROP TABLE IF EXISTS questions CASCADE;
+DROP TABLE IF EXISTS answers CASCADE;
+DROP TABLE IF EXISTS attempts CASCADE;
+DROP TABLE IF EXISTS attempt_answers;
+
+CREATE TABLE quizes (
+  id SERIAL PRIMARY KEY NOT NULL,
+  title TEXT NOT NULL,
+  privacy_setting BOOLEAN NOT NULL,
+  date_created DATE NOT NULL,
+  url TEXT NOT NULL UNIQUE,
+  number_of_questions INTEGER NOT NULL
+);
+
+CREATE TABLE questions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  quiz_id INTEGER REFERENCES quizes(id) ON DELETE CASCADE,
+  question TEXT NOT NULL,
+  correct_answer_id INTEGER REFERENCES answers(id) ON DELETE CASCADE 
+);
+
+CREATE TABLE answers (
+  id SERIAL PRIMARY KEY NOT NULL,
+  question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
+  answer_text TEXT NOT NULL,
+  is_correct BOOLEAN NOT NULL
+);
+
+CREATE TABLE attempts (
+  id SERIAL PRIMARY KEY NOT NULL,
+  quiz_id INTEGER REFERENCES quizes(id) ON DELETE CASCADE,
+  score INTEGER NOT NULL,
+  total_questions INTEGER NOT NULL,
+  timestamp TIMESTAMP NOT NULL DEFAULT NOW(),
+  url TEXT NOT NULL
+);
+
+CREATE TABLE attempt_answers (
+  id SERIAL PRIMARY KEY NOT NULL,
+  attempt_id INTEGER REFERENCES attempts(id) ON DELETE CASCADE,
+  question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
+  selected_answer_id INTEGER REFERENCES answers(id) ON DELETE CASCADE,
+  is_correct BOOLEAN NOT NULL
+);
