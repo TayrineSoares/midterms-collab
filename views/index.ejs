@@ -43,28 +43,36 @@
     <section class="new-quiz">
       <h2>Start a new Quiz!</h2>
 
-    <!-- NOT SURE WHAT THE ACTION SHOULD BE HERE -->
-    <form class="new-quiz-form" action="/" method="POST">
+      <form class="new-quiz-form" action="/quiz" method="POST">
 
-      <textarea name="quiz-title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
+        <textarea name="quiz-title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
 
-    <!-- Quiz Privacy (Select Dropdown) -->
-    <select name="quiz-privacy" id="quiz-privacy" required aria-label="Quiz Privacy">
-      <option value="" disabled selected>Quiz Privacy</option>
-      <option value="public">Public</option>
-      <option value="private">Private</option>
-    </select>
+      <!-- Quiz Privacy (Select Dropdown) -->
+      <select name="quiz-privacy" id="quiz-privacy" required aria-label="Quiz Privacy">
+        <option value="" disabled selected>Quiz Privacy</option>
+        <option value="public">Public</option>
+        <option value="private">Private</option>
+      </select>
 
-    <button type="submit" id="new-quiz-button">Create new quiz</button>
+      <button type="submit" id="new-quiz-btn">Create new quiz</button>
     </section>
-
     </form>
+
+    <!-- Public Quizzes section -->
+    <section class="public-quizzes-container">
+      <section class="public-quizzes">
+        <h1>Public Quiz 1</h1>
+        <h1>Public Quiz 2</h1>
+        <h1>Public Quiz 3</h1>
+      </section>
+
+      <a href="/public">
+        <button type="button" id="all-public-quizzes-btn">See All Public Quizzes</button>
+      </a>
+    </section>
 
 
   </div>
-
-
-
 
 
   <!-- Footer (fixed) -->

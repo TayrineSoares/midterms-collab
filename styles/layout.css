@@ -6,12 +6,12 @@
 
 h1 {
   font-size: 2em;
-  margin: 0.1em;
+  margin: 0.2em;
 }
 
 h3 {
   font-size: 1.5em;
-  margin: 0.1em;
+  margin: 0;
 }
 
 body {
@@ -21,6 +21,9 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: 'Nunito', sans-serif;
+  padding-bottom: 80px; /* makes content not hidden behind footer */
+  padding-top: 80px; /* makes content not hidden behind navbar */
+
 
   background: rgb(163, 208, 219);
   background: linear-gradient(
