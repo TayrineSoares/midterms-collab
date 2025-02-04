@@ -1,19 +1,15 @@
 
 nav {
   background-color: var(--primary-bg-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  position: fixed;      /* Fix the nav at the bottom */
+  top: 0;               /* Set it at the very top of the page */
+  left: 0;              /* Align to the left side */
+  width: 100%;          /* Make the nav bar span the full width */
   padding: 15px;
-}
-
-.nav-quizapp-brand {
   color: var(--primary-text-color);
   font-family: 'Nunito', sans-serif;
-  font-size: 1.5em;
+  font-size: 1.3em;
   font-weight: 700;
-  padding: 20px;
 }
 
 
