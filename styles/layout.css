@@ -4,15 +4,6 @@
   --secondary-bg-color: #E38859;
 }
 
-h1 {
-
-  margin: 0.2em;
-}
-
-h3 {
-
-  margin: 0;
-}
 
 body {
   display: flex;

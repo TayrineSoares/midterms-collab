@@ -4,7 +4,13 @@
   flex-direction: column;
   align-items: center;
   padding: 1em;
+  margin: 20px;
+
 }
+.slogan-line1, .slogan-line2 {
+  margin: 0.2em;
+}
+
 
 .new-quiz {
   display: flex;
