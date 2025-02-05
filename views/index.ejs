@@ -3,22 +3,81 @@
 
 <head>
   <title>Home Page</title>
-
+  <!-- Given code -->
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
+   <!-- Given code -->
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
   <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
+
+
+  <!-- Link CSS Files -->
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/navbar_footer.css" />
+  <link rel="stylesheet" href="/styles/index.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
 
+<!-- Google Fonts ('Nunito', sans-serif;)-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+
+
 <body>
-  <h1>Have fun! 🥔</h1>
+  <!-- Top nav bar (fixed) -->
+  <%- include('partials/_header.ejs') %>
+
+  <!-- Main content -->
+  <div class ="content">
+    <section class="slogan">
+      <h1 class="slogan-line1">Create, Challenge, Share.</h1>
+      <h2 class="slogan-line2">The easiest way to make quizzes for free</h2>
+
+    </section>
+
+    <section class="new-quiz">
+      <h2>Start a new Quiz!</h2>
+
+      <form class="new-quiz-form" action="/quiz" method="POST">
+
+        <textarea name="quiz-title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
+
+      <!-- Quiz Privacy (Select Dropdown) -->
+      <select name="quiz-privacy" id="quiz-privacy" required aria-label="Quiz Privacy">
+        <option value="" disabled selected>Quiz Privacy</option>
+        <option value="public">Public</option>
+        <option value="private">Private</option>
+      </select>
+
+      <button type="submit" id="new-quiz-btn">Start new quiz</button>
+    </section>
+    </form>
+
+    <!-- Public Quizzes section -->
+    <section class="public-quizzes-container">
+    <h2>Test you knowledge and try one of our quizzes! </h2>
+      <section class="public-quizzes">
+        <h1>Public Quiz 1</h1>
+        <h1>Public Quiz 2</h1>
+        <h1>Public Quiz 3</h1>
+      </section>
+
+      <a href="/public">
+        <button type="button" id="all-public-quizzes-btn">See All Public Quizzes</button>
+      </a>
+    </section>
+
+
+  </div>
+
+  <!-- Footer (fixed) -->
+  <%- include('partials/_footer.ejs') %>
+
 </body>
 
 </html>
