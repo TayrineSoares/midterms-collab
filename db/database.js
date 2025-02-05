@@ -1,6 +1,6 @@
 require('dotenv').config({ path: '../.env' }); 
 
-// PG database client/connection setup
+// PG database client/database setup
 const { Pool } = require('pg');
 
 const dbParams = {

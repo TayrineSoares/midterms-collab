@@ -4,7 +4,7 @@ require('dotenv').config();
 // other dependencies
 const fs = require('fs');
 const chalk = require('chalk');
-const db = require('../db/connection');
+const db = require('../db/database');
 
 // PG connection setup
 // const connectionString = process.env.DATABASE_URL ||
