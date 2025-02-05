@@ -1,0 +1,35 @@
+:root {
+  --primary-bg-color: rgb(103, 137, 212);
+  --primary-text-color:  rgb(237, 239, 245);
+  --secondary-bg-color: #E38859;
+}
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  padding-bottom: 80px; /* makes content not hidden behind footer */
+  padding-top: 80px; /* makes content not hidden behind navbar */
+
+
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.content {
+
+
+  padding: 0;
+}

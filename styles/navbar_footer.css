@@ -1,0 +1,27 @@
+
+nav {
+  background-color: var(--primary-bg-color);
+  position: fixed;      /* Fix the nav at the bottom */
+  top: 0;               /* Set it at the very top of the page */
+  left: 0;              /* Align to the left side */
+  width: 100%;          /* Make the nav bar span the full width */
+  color: var(--primary-text-color);
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.3em;
+  font-weight: 700;
+  padding-left: 20px;
+}
+
+
+footer {
+  background-color: var(--primary-bg-color);
+  color: var(--primary-text-color);
+  font-family: 'Nunito', sans-serif;
+  position: fixed;         /* Fix the footer at the bottom */
+  bottom: 0;               /* Set it at the very bottom of the page */
+  left: 0;                 /* Align to the left side */
+  width: 100%;             /* Make the footer span the full width */
+  padding: 0px;
+  text-align: center;
+  font-size: 15px;
+}
