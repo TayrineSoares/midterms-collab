@@ -41,3 +41,5 @@ router.get('/public', (req, res) => {
   res.send ("all public quizzes here"); //will be replaced with res.render(public)
 });
 
+module.exports = router;
+
