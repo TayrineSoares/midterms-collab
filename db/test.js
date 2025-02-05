@@ -1,5 +1,5 @@
 const { TRUE } = require('sass');
-const { addQuiz, addQuestion, addAnswers, getQuizById, getQuestionsForQuiz, getAnswersForQuestion, submitAttempt } = require('./database.js'); // Adjust the path
+const { addQuiz, addQuestion, addAnswer, getQuizById, getQuestionForQuiz, getAnswerForQuestion, submitAttempt, submitAnswer, getAttemptById, getAttemptAnswers } = require('./database.js'); // Adjust the path
 
 // Test `addQuiz`
 const testAddQuiz = async () => {
@@ -31,13 +31,13 @@ const testAddQuestion = async (quizId) => {
   }
 };
 
-const testAddAnswers = async (question) => {
+const testAddAnswer = async (question) => {
   const answerText = "4"; // Assuming "4" is a valid answer
   const is_correct = true;
 
   try {
     // Use question.id directly to pass the question ID to addAnswers
-    const addedAnswer = await addAnswers(question.id, answerText, is_correct);
+    const addedAnswer = await addAnswer(question.id, answerText, is_correct);
     console.log("Added Answer:", addedAnswer);
     return addedAnswer; // Return the added answer to use in next tests
   } catch (error) {
@@ -56,9 +56,9 @@ const testGetQuizById = async (quizId) => {
 };
 
 // Test `getQuestionsForQuiz`
-const testGetQuestionsForQuiz = async (quizId) => {
+const testGetQuestionForQuiz = async (quizId) => {
   try {
-    const questions = await getQuestionsForQuiz(quizId);
+    const questions = await getQuestionForQuiz(quizId);
     console.log("Retrieved Questions:", questions);
   } catch (error) {
     console.error("Error testing getQuestionsForQuiz:", error.message);
@@ -66,18 +66,19 @@ const testGetQuestionsForQuiz = async (quizId) => {
 };
 
 // Test `getAnswersForQuestion`
-const testGetAnswersForQuestion = async (questionId) => {
+const testGetAnswerForQuestion = async (questionId) => {
   try {
-    const answers = await getAnswersForQuestion(questionId);
+    const answers = await getAnswerForQuestion(questionId);
     console.log("Retrieved Answers:", answers);
   } catch (error) {
     console.error("Error testing getAnswersForQuestion:", error.message);
   }
 };
 
+// Test `submitAttempt`
 const testSubmitAttempt = async () => {
   const mockAttempt = {
-    quiz_id: 13, // Assuming quiz with ID 13 exists
+    quiz_id: 1, // Use quiz ID 1 from your seeds (Math Quiz)
     score: 4, // Example score
     totalQuestions: 5, // Example total questions
   };
@@ -97,7 +98,78 @@ const testSubmitAttempt = async () => {
   }
 };
 
-// Other existing tests here...
+// Test `submitAnswer`
+const testSubmitAnswer = async () => {
+  const mockAttempt = {
+    quiz_id: 1, // Use quiz ID 1 from your seeds (Math Quiz)
+    score: 0, // Example starting score
+    totalQuestions: 1, // Example total questions
+  };
+
+  const mockQuestion = {
+    id: 1, // Use question ID 1 from your seeds (What is 2 + 2?)
+  };
+
+  const correctAnswerId = 1; // Correct answer ID for "What is 2 + 2?" is 1 (answer "4")
+  const wrongAnswerId = 2; // Wrong answer ID for "What is 2 + 2?" is 2 (answer "5")
+
+  try {
+    // Submit the attempt
+    const submittedAttempt = await submitAttempt(mockAttempt);
+    console.log("Submitted Attempt:", submittedAttempt);
+
+    // Submit the correct answer
+    const submittedCorrectAnswer = await submitAnswer(
+      submittedAttempt.id,
+      mockQuestion.id,
+      correctAnswerId
+    );
+    console.log("Submitted Correct Answer:", submittedCorrectAnswer);
+
+    // Submit the wrong answer
+    const submittedWrongAnswer = await submitAnswer(
+      submittedAttempt.id,
+      mockQuestion.id,
+      wrongAnswerId
+    );
+    console.log("Submitted Wrong Answer:", submittedWrongAnswer);
+
+    // Check outcomes
+    if (submittedCorrectAnswer.is_correct) {
+      console.log("Correct answer submission test passed.");
+    } else {
+      console.log("Correct answer submission test failed.");
+    }
+
+    if (!submittedWrongAnswer.is_correct) {
+      console.log("Wrong answer submission test passed.");
+    } else {
+      console.log("Wrong answer submission test failed.");
+    }
+  } catch (error) {
+    console.error("Error testing submitAnswer:", error.message);
+  }
+};
+
+// Test `getAttemptById`
+const testGetAttemptById = async (attemptId) => {
+  try {
+    const attempt = await getAttemptById(attemptId);
+    console.log("Retrieved Attempt:", attempt);
+  } catch (error) {
+    console.error("Error testing getAttemptById:", error.message);
+  }
+};
+
+// Test `getAttemptAnswers`
+const testGetAttemptAnswers = async (attemptId) => {
+  try {
+    const attemptAnswers = await getAttemptAnswers(attemptId);
+    console.log("Retrieved Attempt Answers:", attemptAnswers);
+  } catch (error) {
+    console.error("Error testing getAttemptAnswers:", error.message);
+  }
+};
 
 // Run all tests
 (async () => {
@@ -105,11 +177,17 @@ const testSubmitAttempt = async () => {
   if (quiz) {
     const question = await testAddQuestion(quiz.id); // Add a question to the quiz
     if (question) {
-      await testAddAnswers(question); // Add an answer for the question
+      await testAddAnswer(question); // Add an answer for the question
       await testGetQuizById(quiz.id); // Retrieve the quiz by its ID
-      await testGetQuestionsForQuiz(quiz.id); // Retrieve questions for the quiz
-      await testGetAnswersForQuestion(question.id); // Retrieve answers for the question
+      await testGetQuestionForQuiz(quiz.id); // Retrieve questions for the quiz
+      await testGetAnswerForQuestion(question.id); // Retrieve answers for the question
       await testSubmitAttempt(); // Test submitAttempt
+      await testSubmitAnswer(); // Test submitAnswer
+
+      // Assuming you have a valid attemptId to test
+      const attemptId = 1; // Use a valid attempt ID from your tests
+      await testGetAttemptById(attemptId); // Test getAttemptById
+      await testGetAttemptAnswers(attemptId); // Test getAttemptAnswers
     }
   }
 })();

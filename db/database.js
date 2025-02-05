@@ -26,7 +26,7 @@ db.query('SELECT NOW()')
 // Adds new quiz to database
 const addQuiz = function (quiz) {
   // Generate a unique URL for the quiz
-  const url = `http://localhost:8080/quizzes/${Math.random().toString(36).substring(7)}`;
+  const url = `http://localhost:8080/quiz/${Math.random().toString(36).substring(7)}`;
 
   return db
     .query(`INSERT INTO quizzes (title, privacy_setting, url, timestamp, number_of_questions) VALUES ($1, $2, $3, $4, $5) RETURNING *`, [quiz.title, quiz.privacy_setting, url, quiz.timestamp, quiz.number_of_questions])
@@ -53,7 +53,7 @@ const addQuestion = function (quizId, questionText) {
     });
 }
 
-const addAnswers = function (questionId, answerText, is_correct) {
+const addAnswer = function (questionId, answerText, is_correct) {
   return db
     .query(`INSERT INTO answers (question_id, answer_text, is_correct) VALUES ($1, $2, $3) RETURNING *`, [questionId, answerText, is_correct])
     .then((result) => {
@@ -81,7 +81,7 @@ const getQuizById = function (quizId) {
     })
 };
 
-const getQuestionsForQuiz = function (quizId) {
+const getQuestionForQuiz = function (quizId) {
   return db
     .query(`SELECT * FROM questions WHERE quiz_id = $1`, [quizId])
     .then((result) => {
@@ -95,7 +95,7 @@ const getQuestionsForQuiz = function (quizId) {
 
 };
 
-const getAnswersForQuestion = function (questionId) {
+const getAnswerForQuestion = function (questionId) {
   return db
     .query(`SELECT * FROM answers WHERE question_id = $1`, [questionId])
     .then((result) => {
@@ -113,12 +113,12 @@ const getAnswersForQuestion = function (questionId) {
 // Records attempt from taking quiz
 const submitAttempt = function (attempt) {
   
-  const url = `http://localhost:8080/attempts/${Math.random().toString(36).substring(7)}`;
+  const url = `http://localhost:8080/results/${Math.random().toString(36).substring(7)}`;
 
   return db
     .query(`INSERT INTO attempts (quiz_id, score, total_questions, url) VALUES ($1, $2, $3, $4) RETURNING *`, [attempt.quiz_id, attempt.score, attempt.totalQuestions, url])
     .then((result) => {
-      console.log(`Submited Attemp: `, result.rows[0]);
+      console.log(`Submited Attempt: `, result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
@@ -129,28 +129,76 @@ const submitAttempt = function (attempt) {
 
 // Records the answers selected by quiz taker
 const submitAnswer = function (attemptId, questionId, selectedAnswerId) {
-  
+
+  return db
+    .query(`SELECT is_correct FROM answers WHERE id = $1`, [selectedAnswerId])
+    .then((result) => {
+      const isCorrect = result.rows[0] ? result.rows[0].is_correct : false;
+
+      return db
+        .query(
+          `INSERT INTO attempt_answers (attempt_id, question_id, selected_answer_id, is_correct) VALUES ($1, $2, $3, $4) RETURNING *`,
+          [attemptId, questionId, selectedAnswerId, isCorrect]
+        )
+        .then((result) => {
+          console.log(`Submitted Answer: `, result.rows[0]);
+          return result.rows[0];
+        })
+        .catch((err) => {
+          console.error(`Error submitting answer: `, err.message);
+          throw err;
+        });
+    })
+    .catch((err) => {
+      console.error(`Error fetching answer correctness: `, err.message);
+      throw err;
+    });
 };
 
 // Quiz Results
 
 // Retrieves quiz attempt by ID
 const getAttemptById = function (attemptId) {
-
+  return db
+    .query(`SELECT * FROM attempts WHERE id = $1`, [attemptId])
+    .then((result) => {
+      console.log(`Attemp accessed: `, result.rows[0]);
+      return result.rows[0];
+    })
+    .catch((err) => {
+      console.log(`Error accessing attempt: `, err.message);
+      throw err;
+    })
 };
 
 // Retrieves all answers to a quiz attempt
 const getAttemptAnswers = function (attemptId) {
-
+  return db
+    .query(`SELECT attempt_answers.id AS attempt_answer_id, questions.question AS question_text, answers.answer_text AS selected_answer, attempt_answers.is_correct AS answer_correctness
+    FROM attempt_answers
+    JOIN questions ON attempt_answers.question_id = questions.id
+    JOIN answers ON attempt_answers.selected_answer_id = answers.id
+    WHERE attempt_answers.attempt_id = $1`, [attemptId])
+    .then((result) => {
+      console.log(`Attempt answers retrieved: `, result.rows);
+      return result.rowCount;
+    })
+    .catch((err) => {
+      console.log(`Error retrieving attempt answers: `, err.message)
+      throw err;
+    })
 };
 
 module.exports = { 
   db,
   addQuiz,
   addQuestion,
-  addAnswers,
+  addAnswer,
   getQuizById,
-  getQuestionsForQuiz,
-  getAnswersForQuestion,
-  submitAttempt
+  getQuestionForQuiz,
+  getAnswerForQuestion,
+  submitAttempt,
+  submitAnswer,
+  getAttemptById,
+  getAttemptAnswers
 };
