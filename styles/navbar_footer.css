@@ -10,6 +10,7 @@ nav {
   font-size: 1.3em;
   font-weight: 700;
   padding-left: 20px;
+  z-index: 1000; /* Ensure navbar is above other elements */
 }
 
 
