@@ -1,0 +1,74 @@
+.unique-quiz-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.unique-quiz-title {
+  /* background-color: pink; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.unique-quiz-title h1,
+.unique-quiz-title p {
+  margin: 2px;  /* Remove default margin */
+  padding: 2px; /* Remove any padding */
+}
+
+
+.questions-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  padding-bottom: 50px;
+
+}
+
+.questions-form textarea {
+  width: 100%; /* Ensure the textarea is as wide as the form */
+  padding: 5px;
+  margin-top: 10px;
+  margin: 10px;
+
+}
+
+.label-for-answers {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+
+}
+
+
+.answer-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 10px; /* Adds space between the input and radio button */
+
+
+}
+
+.answer-group input[type="text"]{
+  width: 70%; /* Ensure the textarea is as wide as the form */
+  padding: 5px;
+  margin-bottom: 20px;
+  margin-right: 4em;
+
+}
+
+.answer-radio {
+  width: 20px;
+  height: 20px;
+}
+
+#add-question {
+  width: 100%;
+}

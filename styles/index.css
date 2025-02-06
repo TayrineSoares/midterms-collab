@@ -7,10 +7,9 @@
   margin: 20px;
 
 }
-.slogan-line1, .slogan-line2 {
+.slogan h1, h2 {
   margin: 0.2em;
 }
-
 
 .new-quiz {
   display: flex;
@@ -40,18 +39,6 @@
 
 }
 
-#new-quiz-btn {
-  padding: 0.5em;
-  margin: 0.5em;
-  height: 40px;
-  font-family: 'Nunito', sans-serif;
-  background-color: var(--secondary-bg-color);
-  color: var(--primary-text-color);
-  font-weight: 700;
-  border-radius: 5px;
-
-}
-
 .public-quizzes-container {
   display: flex;
   flex-direction: column;
@@ -68,15 +55,7 @@
   width: 100%;
 }
 
-#all-public-quizzes-btn {
-  padding: 0.5em;
-  margin: 0.5em;
-  height: 40px;
-  font-family: 'Nunito', sans-serif;
-  background-color: var(--secondary-bg-color);
-  color: var(--primary-text-color);
-  font-weight: 700;
-  border-radius: 5px;
 
+#all-public-quizzes-btn:active {
+  transform: scale(0.95); /* Slightly shrink the button when clicked */
 }
-

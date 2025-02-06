@@ -15,7 +15,7 @@
   <!-- Link CSS Files -->
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
-  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/quiz.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -35,9 +35,59 @@
 
 
   <!-- Main content -->
-  <div>
-    <h1>THIS IS MY QUIZ PAGE</h1>
+  <div class="unique-quiz-main">
+    <section class="unique-quiz-title">
+    <!-- quizTitle and quizPrivacy values will come from the -->
+    <!-- POST request that handles the form submission-->
+    <h1>Quiz Title: add embeded quizTitle here </h1>
+    <p>Privacy: add embeded quizPrivacy here </p>
+    </section>
+
+    <!-- Form to add questions -->
+    <h2>Add a Question</h2>
+
+    <!-- Form to add questions -->
+    <!-- NOT SURE ABOUT THE ACTION HERE-->
+    <form class="questions-form" action="/create:id" method="POST">
+
+      <textarea name="question" id="question" required placeholder="Enter your question"></textarea>
+
+      <div class="label-for-answers">
+      <p>Correct answer</p>
+      </div>
+
+      <div class="answer-group">
+        <input type="text" name="answer1" id="answer1" required placeholder="Enter answer 1" />
+        <input type="radio" name="correct-answer" value="answer1" class="answer-radio" />
+      </div>
+
+      <div class="answer-group">
+        <input type="text" name="answer2" id="answer2" required placeholder="Enter answer 2" />
+        <input type="radio" name="correct-answer" value="answer2" class="answer-radio" /> <!-- radio buttons having the same name is what makes it possible to only select 1 option -->
+      </div>
+
+      <div class="answer-group">
+        <input type="text" name="answer3" id="answer3" required placeholder="Enter answer 3" />
+        <input type="radio" name="correct-answer" value="answer3" class="answer-radio" />
+      </div>
+
+      <div class="answer-group">
+      <input type="text" name="answer4" id="answer4" required placeholder="Enter answer 4" />
+      <input type="radio" name="correct-answer" value="answer4" class="answer-radio" />
+      </div>
+
+
+
+      <button id="add-question" type="submit">Add Question</button>
+    </form>
+      <button type="submit">Generate Quiz</button>
+
+
+
+
   </div>
+
+
 
 
   <!-- Footer (fixed) -->
