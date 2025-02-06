@@ -3,12 +3,13 @@ const router = express.Router();
 
 
 router.post('/', (req, res) => {
-  res.redirect('/quiz'); 
+ 
+  res.redirect('/create'); 
 });
 
 
 router.get('/', (req, res) => {
-  res.render('quiz'); 
+  res.render('create'); 
 });
 
 module.exports = router;
