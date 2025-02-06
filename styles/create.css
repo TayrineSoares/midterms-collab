@@ -82,13 +82,13 @@
   margin-left: 5px; /* Adds some space between radio button and text input */
 }
 
-#add-question {
+#add-question-btn {
   width: 80%;
   margin-top: 30px;
   background-color: var(--tertiary-bg-color);
 }
 
-#generate-quiz {
+#generate-quiz-btn {
   width: 80%;
   background-color: var(--secondary-bg-color);
 }
