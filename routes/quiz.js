@@ -1,15 +1,19 @@
 const express = require('express');
-const router = express.Router();
+const router  = express.Router();
 
 
 router.post('/', (req, res) => {
- 
-  res.redirect('/create'); 
+   
+  res.redirect('/quiz'); 
 });
 
 
 router.get('/', (req, res) => {
-  res.render('/create'); 
+  
+  res.render('quiz'); 
 });
 
+router.get('/:id', (req, res) => {
+
+})
 module.exports = router;
