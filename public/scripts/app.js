@@ -13,6 +13,7 @@
 // });
 
 
+
 $(document).ready(function() {
   // Button click event
   $('#all-public-quizzes-btn'). on('click', () => {
