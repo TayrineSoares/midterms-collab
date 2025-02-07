@@ -2,6 +2,7 @@
   --primary-bg-color: rgb(103, 137, 212);
   --primary-text-color:  rgb(237, 239, 245);
   --secondary-bg-color: #E38859;
+  --tertiary-bg-color: #1976D2;
 }
 
 
@@ -32,4 +33,15 @@ body {
 
 
   padding: 0;
+}
+
+button {
+    padding: 0.5em;
+    margin: 0.5em;
+    height: 40px;
+    font-family: 'Nunito', sans-serif;
+    background-color: var(--secondary-bg-color);
+    color: var(--primary-text-color);
+    font-weight: 700;
+    border-radius: 5px;
 }

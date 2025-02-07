@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Create your quiz</title>
+
+
+  <!-- ADD THE QUIZ TITLE HERE -->
+  <title>Quiz TITLE</title>
   <!-- Given code -->
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -14,7 +17,7 @@
   <!-- Link CSS Files -->
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
-  <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/create.css" />
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -34,7 +37,70 @@
 
 
   <!-- Main content -->
-  <div>
+  <div class="unique-quiz-main">
+    <section class="unique-quiz-title">
+    <!-- quizTitle and quizPrivacy variables will come from the -->
+    <!-- POST request that handles the form submission-->
+    <!--UPDATE THIS LINES AFTER quizTitle and quizPrivacy ARE DEFINED-->
+    <h1>Quiz Title: add embeded quizTitle here </h1>
+    <p>Privacy: add embeded quizPrivacy here </p>
+
+    <!-- INSERT CODE TO DISPLAY EXISTING QUESTIONS HERE -->
+
+    </section>
+
+
+    <!-- Form to add questions -->
+    <section class="add-question-text">
+      <h1>Add a Question</h1>
+      <p>Min of 03, Max of 10</p>
+    </section>
+
+    <!--ADD QUESTION BUTTON/FORM -->
+    <!--When the "Add Question" button is clicked, the form submits the question and answers to the server using POST.-->
+    <!--The server saves the new question to the database and redirects the user back to the same page to add more questions.-->
+    <!--The quiz creation page displays any existing questions from the database, and users can continue adding questions until they’re finished.-->
+
+    <!-- 01 THE ACTION SHOULD CONTAIN EJS FROM THE BACKEND  -->
+    <!-- UPDATE THE ACTION ACCORDING TO BACKEND WHEN THEY ARE AVAILABLE  -->
+    <form class="questions-form" action="/create:id" method="POST">
+
+      <textarea name="question" id="question" required placeholder="Enter your question"></textarea>
+
+      <div class="label-for-answers">
+      <p>Correct answer</p>
+      </div>
+
+      <div class="answer-group">
+        <input type="text" name="answer1" id="answer1" required placeholder="Enter answer 1" />
+        <input type="radio" name="correct-answer" value="answer1" class="answer-radio" />
+      </div>
+
+      <div class="answer-group">
+        <input type="text" name="answer2" id="answer2" required placeholder="Enter answer 2" />
+        <input type="radio" name="correct-answer" value="answer2" class="answer-radio" /> <!-- radio buttons having the same name is what makes the user to be able select only 1 option -->
+      </div>
+
+      <div class="answer-group">
+        <input type="text" name="answer3" id="answer3" required placeholder="Enter answer 3" />
+        <input type="radio" name="correct-answer" value="answer3" class="answer-radio" />
+      </div>
+
+      <div class="answer-group">
+      <input type="text" name="answer4" id="answer4" required placeholder="Enter answer 4" />
+      <input type="radio" name="correct-answer" value="answer4" class="answer-radio" />
+      </div>
+
+
+      <!--ADD QUESTION BUTTON/FORM -->
+      <button id="add-question-btn" type="submit">Add Question</button>
+    </form>
+
+      <!--GENERATE QUIZ BUTTON -->
+      <!--Retrieve the quiz and all of its associated questions from the database. Redirect the user to a new page (/quiz/:id), where the quiz is displayed with the questions for the user to take.-->
+      <!--REPLACE THIS LINE WITH NUMBER 02 AFTER quizId IS PASSED FROM ROUTER-->
+      <button id="generate-quiz-btn" type="button">Generate Quiz</button>
+
 
   </div>
 

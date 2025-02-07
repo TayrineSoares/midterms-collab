@@ -8,8 +8,9 @@
 const express = require('express');
 const router  = express.Router();
 
+/* REMEMBER TO SET THIS BACK TO USERS */
 router.get('/', (req, res) => {
-  res.render('users');
-}); 
+  res.render('results');
+});
 
 module.exports = router;

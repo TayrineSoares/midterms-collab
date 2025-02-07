@@ -15,6 +15,8 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
   <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/results.css" />
+
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
@@ -32,10 +34,88 @@
   <%- include('partials/_header.ejs') %>
 
 
-
   <!-- Main content -->
-  <div>
+  <div class="unique-results-main">
+    <section class="unique-results-title">
+      <!-- quizTitle and quizPrivacy variables will come from the -->
+      <!-- GET THE SCORE FROM BACK END, ADD EMBEDED CODE -->
+      <!--UPDATE THIS LINES AFTER quizTitle and SCORE ARE DEFINED-->
+      <h1>Quiz Title: add embeded quizTitle here </h1>
+      <h1>Score: 2/3 </h1>
+    </section>
 
+    <!-- HARD CODING QUESTIONS FOR LAYOUT PURPOSES-->
+    <section class="all-questions">
+
+      <!-- First Question -->
+      <div class="question">
+        <h3>Question 1: Bacon ipsum dolor amet spare ribs tenderloin doner ground round. </h3>
+
+        <!-- Answer 1 -->
+        <!-- ASSUMING THIS IS THE CORRECT ANSWER-->
+        <div class="answer-options correct-answer">
+          <input type="radio" class="answer-radio" name="question-1"  value="answer-1" id="answer-1-1" checked/>
+          <p>T-bone jowl reprehenderit ipsum picanha.</p>
+        </div>
+
+        <!-- Answer 2 -->
+        <div class="answer-options">
+          <input type="radio" class="answer-radio" name="question-1"  value="answer-2" id="answer-1-2" />
+          <p>T-bone jowl reprehenderit ipsum picanha.</p>
+        </div>
+
+        <!-- Answer 3 -->
+        <div class="answer-options">
+          <input type="radio" class="answer-radio" name="question-1"  value="answer-3" id="answer-1-3" />
+          <p>T-bone jowl reprehenderit ipsum picanha.</p>
+        </div>
+
+        <!-- Answer 4 -->
+        <div class="answer-options">
+          <input type="radio" class="answer-radio" name="question-1"  value="answer-4" id="answer-1-4" />
+          <p>T-bone jowl reprehenderit ipsum picanha.</p>
+        </div>
+      </div>
+
+
+      <!-- Second Question -->
+      <div class="question">
+        <h3>Question 2: Burgdoggen pancetta sirloin flank, ham quis minim laborum eiusmod ea pork belly picanha ham hock. </h3>
+
+
+      <!-- Answer 1 -->
+      <div class="answer-options">
+        <input type="radio" class="answer-radio" name="question-2"  value="answer-1" id="answer-2-1" />
+        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
+      </div>
+
+      <!-- Answer 2 -->
+      <div class="answer-options">
+        <input type="radio" class="answer-radio" name="question-2"  value="answer-2" id="answer-2-2" />
+        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
+      </div>
+
+      <!-- Answer 3 -->
+      <!-- ASSUMING THIS IS THE CORRECT ANSWER-->
+      <div class="answer-options correct-answer">
+        <input type="radio" class="answer-radio" name="question-2"  value="answer-3" id="answer-2-3" checked/>
+        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
+      </div>
+
+      <!-- Answer 4 -->
+      <div class="answer-options">
+        <input type="radio" class="answer-radio" name="question-2"  value="answer-4" id="answer-2-4" />
+        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
+      </div>
+    </div>
+
+    <!-- Button to Copy the Results URL -->
+    <button id="copy-results-url-btn" type="button">Copy Results URL</button>
+
+
+    <!-- Button to go back to the homepage -->
+    <!-- ADD EVENT LISTENER ON APP.JS TO MAKE THE BUTTON WORK-->
+    <button id="go-to-homepage-btn" type="button">Back to Homepage</button>
   </div>
 
 

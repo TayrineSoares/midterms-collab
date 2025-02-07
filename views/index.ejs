@@ -35,15 +35,15 @@
   <!-- Main content -->
   <div class ="content">
     <section class="slogan">
-      <h1 class="slogan-line1">Create, Challenge, Share.</h1>
-      <h2 class="slogan-line2">The easiest way to make quizzes for free</h2>
+      <h1>Create, Challenge, Share.</h1>
+      <h2>The easiest way to make quizzes for free</h2>
 
     </section>
 
     <section class="new-quiz">
       <h2>Start a new Quiz!</h2>
 
-      <form class="new-quiz-form" action="/quiz" method="POST">
+      <form class="new-quiz-form" action="/create" method="POST">
 
         <textarea name="quiz-title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
 
@@ -61,15 +61,20 @@
     <!-- Public Quizzes section -->
     <section class="public-quizzes-container">
     <h2>Test you knowledge and try one of our quizzes! </h2>
+
+      <!-- For now using text for styling purposes -->
+      <!-- Retrieve quizzes from DB later -->
       <section class="public-quizzes">
         <h1>Public Quiz 1</h1>
         <h1>Public Quiz 2</h1>
         <h1>Public Quiz 3</h1>
       </section>
 
-      <a href="/public">
-        <button type="button" id="all-public-quizzes-btn">See All Public Quizzes</button>
-      </a>
+      <!--Button to go to all quizzes page-->
+      <!-- ADD EVENT LISTENER ON APP.JS TO MAKE THE BUTTON WORK-->
+      <button id="all-public-quizzes-btn" type="button">See All Public Quizzes</button>
+
+
     </section>
 
 
