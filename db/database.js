@@ -43,11 +43,13 @@ const addQuiz = function (quiz) {
 }
 
 const addQuestions = function (quizId, questions) {
+  // Map each question text to a database query promise for insertion
   const questionPromises = questions.map((questionText) => {
     return db
-    .query(`INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING *`, [quizId, questionText]);
+      .query(`INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING *`, [quizId, questionText]);
   });
- 
+
+  // Execute all question insertion queries concurrently and handle results or errors
   return Promise.all(questionPromises)
     .then((results) => {
       console.log(`Questions added for quizID ${quizId}: `, results);
@@ -56,21 +58,29 @@ const addQuestions = function (quizId, questions) {
     .catch((err) => {
       console.log('Error adding questions: ', err.message);
       throw err;
-    }); 
-}
+    });
+};
 
-const addAnswer = function (questionId, answerText, is_correct) {
-  return db
-    .query(`INSERT INTO answers (question_id, answer_text, is_correct) VALUES ($1, $2, $3) RETURNING *`, [questionId, answerText, is_correct])
-    .then((result) => {
-      console.log(`Answers added for questionID ${questionId}: `, result.rows)
-      return result.rows;
+const addAnswers = function (quizId, answers) {
+  const answerPromises = answers.map((answer) => {
+    const { questionId, answer_text, is_correct } = answer;
+    return db.query(
+      `INSERT INTO answers (question_id, answer_text, is_correct) 
+       VALUES ($1, $2, $3) RETURNING *`,
+      [questionId, answer_text, is_correct]
+    );
+  });
+
+  return Promise.all(answerPromises)
+    .then((results) => {
+      console.log(`Answers added for quiz ID ${quizId}:`, results);
+      return results;
     })
     .catch((err) => {
-      console.log('Error adding answer: ', err.message)
+      console.log('Error adding answers:', err.message);
       throw err;
     });
-}
+};
 
 // Quiz Access
 
@@ -199,7 +209,7 @@ module.exports = {
   db,
   addQuiz,
   addQuestions,
-  addAnswer,
+  addAnswers,
   getQuizById,
   getQuestionForQuiz,
   getAnswerForQuestion,

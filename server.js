@@ -35,9 +35,9 @@ const publicRoutes = require('./routes/public');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/quiz', quizroutes)
+app.use('/quiz', quizroutes);
 app.use('/create-questions', createQuestions);  // Quiz questions creation routes
-app.use('./create-answers', createAnswers)
+app.use('/create-answers', createAnswers); // Corrected this line
 app.use('/results', resultsRoutes);  // Results related routes
 app.use('/public', publicRoutes);  // Public quizzes routes
 // Note: mount other resources here, using the same pattern above

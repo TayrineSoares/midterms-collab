@@ -2,14 +2,14 @@ const express = require('express');
 const router = express.Router();
 const { addQuestions } = require('../db/database')
 
-router.get('/', (req, res) => {
+// GET route to render the 'create' page and pass quizId
+router.get('/:quizId', (req, res) => {
   const { quizId } = req.params;
-
   res.render('create', { quizId });
 });
 
 router.post('/', (req, res) => {
-  // TEMP: Hardcode quizId for testing
+  // Hardcode quizId for testing
   const quizId = 1; 
 
   const questions = req.body.questions; // Changed to 'questions'
@@ -24,12 +24,12 @@ router.post('/', (req, res) => {
   addQuestions(quizId, questions)
     .then(() => {
       console.log(`Questions added to quiz ${quizId}:`, questions);
-      res.status(201).send({ message: 'Questions added successfully' });
+      res.send({ message: 'Questions added successfully' });
     })
     .catch((err) => {
-      console.error('Error adding questions:', err.message);
-      res.status(500).send({ error: 'Internal Server Error', details: err.message });
+      console.log('Error adding questions:', err.message);
+      throw err;
     });
 });
 
-module.exports = router;
+module.exports = router; 
