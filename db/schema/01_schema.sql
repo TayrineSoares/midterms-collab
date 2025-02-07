@@ -9,8 +9,7 @@ CREATE TABLE quizzes (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   privacy_setting BOOLEAN NOT NULL,
-  url TEXT NOT NULL UNIQUE,
-  number_of_questions INTEGER NOT NULL
+  url TEXT NOT NULL UNIQUE
 );
 
 -- Create questions table first, referencing quizzes
