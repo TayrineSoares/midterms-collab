@@ -26,7 +26,7 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const quizroutes = require('./routes/quiz');
-const createRoutes = require('./routes/create');
+const createRoutes = require('./routes/create'); 
 const resultsRoutes = require('./routes/results');
 const publicRoutes = require('./routes/public');
 const homeRoutes = require('./routes/home');
@@ -38,27 +38,15 @@ const homeRoutes = require('./routes/home');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/quiz', quizroutes)
-app.use('/create', createRoutes);  // Quiz creation routes
-app.use('/results', resultsRoutes);  // Results related routes
-app.use('/public', publicRoutes);  // Public quizzes routes
-app.use('/home', homeRoutes);
+app.use('/quiz', quizroutes);
+app.use('/create-quiz', createRoutes);
+app.use('/results', resultsRoutes); 
+app.use('/public', publicRoutes); 
+app.use('/', homeRoutes);
 // Note: mount other resources here, using the same pattern above
 
-// Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-
-app.get('/', (req, res) => {
-
-
-  
-  res.render('index');
-});
-
-
-
-
 
 
 
