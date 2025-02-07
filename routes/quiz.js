@@ -9,7 +9,7 @@ router.post('/', (req, res) => {
 
 
 router.get('/', (req, res) => {
-  res.render('create'); 
+  res.render('/create'); 
 });
 
 module.exports = router;
