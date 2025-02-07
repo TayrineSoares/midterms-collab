@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 
 
+
 router.get('/', (req, res) => {
   res.render('public'); 
 });
 
 
-router.post('/', (req, res) => {
+router.post('/public', (req, res) => {
   res.render('public'); 
 });
 
