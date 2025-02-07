@@ -4,6 +4,8 @@ require('dotenv').config();
 // Web server config
 const express = require('express');
 const morgan = require('morgan');
+const { addQuiz } = require('./db/database');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -52,10 +54,36 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.post('/', (res, req) => {
+app.post('/', (req, res) => {
+  const { quizTitle, privacySetting } = req.body;
 
-  res.redirect('/create')
-})
+  const quiz = {
+    title: quizTitle,
+    privacy_setting: privacySetting,
+  };
+
+  
+  addQuiz(quiz)
+    .then((createdQuiz) => {
+      console.log('Quiz created:', createdQuiz);
+      
+      
+      res.redirect(`/create/${createdQuiz.id}`);
+    })
+    .catch((err) => {
+      console.error("Error creating quiz:", err);
+      res.status(500).send("Error creating quiz.");
+    });
+});
+
+
+app.get('/create/:id', (req, res) => {
+  const quizId = req.params.id;  
+
+  
+  res.render('create', { quizId });
+});
+
 
 
 

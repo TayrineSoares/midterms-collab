@@ -2,21 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { addQuestion } = require('../db/database')
 
-<<<<<<< HEAD
-router.get('/', (req, res) => { 
-  console.log('/create triggered')
-
-  res.render('create'); 
-});
-
-router.post('/', (req, res) =>{
-
-
-    res.redirect('/create')
-})
-
-router.post('/create:id', (req, res) => {
-=======
 router.get('/', (req, res) => {
   const { quizId } = req.params;
 
@@ -35,7 +20,6 @@ router.post('/', (req, res) => {
     console.log('No question provided');
     return res.status(400).send({ error: 'Question is required' });
   }
->>>>>>> master
 
   addQuestion(quizId, questionText)
     .then(() => {
