@@ -7,11 +7,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const { quizTitle, privacySetting } = req.body;
+  const { title, privacy_setting } = req.body;
 
   const quiz = {
-    title: quizTitle,
-    privacy_setting: privacySetting === 'private',  // Ensure privacy is set to true/false
+    title: title,
+    privacy_setting: privacy_setting === 'private',  // Ensure privacy is set to true/false
   };
 
   addQuiz(quiz)
@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
       console.log('Quiz created:', createdQuiz);
       
       // Redirect to the create-questions page for this quiz
-      res.redirect(`/create/${createdQuiz.id}`);
+      res.redirect(`/quiz/create/${createdQuiz.id}`);
     })
     .catch((err) => {
       console.error("Error creating quiz:", err);

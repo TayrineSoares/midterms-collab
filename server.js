@@ -25,11 +25,11 @@ app.use(express.json());
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
-const quizroutes = require('./routes/quiz');
 const createRoutes = require('./routes/create'); 
 const resultsRoutes = require('./routes/results');
 const publicRoutes = require('./routes/public');
 const homeRoutes = require('./routes/home');
+const quizRoutes = require('./routes/quizRoutes');
 
 
 // Mount all resource routes
@@ -38,11 +38,11 @@ const homeRoutes = require('./routes/home');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/quiz', quizroutes);
 app.use('/create-quiz', createRoutes);
 app.use('/results', resultsRoutes); 
 app.use('/public', publicRoutes); 
 app.use('/', homeRoutes);
+app.use('/quiz', quizRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Warning: avoid creating more routes in this file!
