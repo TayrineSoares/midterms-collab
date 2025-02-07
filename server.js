@@ -16,6 +16,7 @@ app.set('view engine', 'ejs');
 app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+app.use(express.json());
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -34,7 +35,7 @@ const publicRoutes = require('./routes/public');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use( '/quiz', quizroutes)
+app.use('/quiz', quizroutes)
 app.use('/create', createRoutes);  // Quiz creation routes
 app.use('/results', resultsRoutes);  // Results related routes
 app.use('/public', publicRoutes);  // Public quizzes routes
