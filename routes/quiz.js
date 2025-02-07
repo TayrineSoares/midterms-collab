@@ -3,13 +3,13 @@ const router = express.Router();
 
 
 router.post('/', (req, res) => {
- 
-  res.redirect('/create'); 
+
+  res.redirect('/create');
 });
 
 
 router.get('/', (req, res) => {
-  res.render('/create'); 
+  res.render('/create');
 });
 
 module.exports = router;
