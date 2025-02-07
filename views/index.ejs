@@ -44,12 +44,12 @@
     <section class="new-quiz">
       <h2>Start a new Quiz!</h2>
 
-      <form class="new-quiz-form" action="/create" method="POST">
+      <form class="new-quiz-form" action="/" method="POST">
 
-        <textarea name="quiz-title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
+        <textarea name="title" id="quiz-title" required placeholder="Enter your Quiz Title"></textarea>
 
       <!-- Quiz Privacy (Select Dropdown) -->
-      <select name="quiz-privacy" id="quiz-privacy" required aria-label="Quiz Privacy">
+      <select name="privacy_setting" id="quiz-privacy" required aria-label="Quiz Privacy">
         <option value="" disabled selected>Quiz Privacy</option>
         <option value="public">Public</option>
         <option value="private">Private</option>
