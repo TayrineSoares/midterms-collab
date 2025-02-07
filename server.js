@@ -34,7 +34,7 @@ const publicRoutes = require('./routes/public');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use( '/quiz', quizroutes)
+app.use('/quiz', quizroutes)
 app.use('/create', createRoutes);  // Quiz creation routes
 app.use('/results', resultsRoutes);  // Results related routes
 app.use('/public', publicRoutes);  // Public quizzes routes

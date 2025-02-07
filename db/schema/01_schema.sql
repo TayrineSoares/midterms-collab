@@ -9,7 +9,6 @@ CREATE TABLE quizzes (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   privacy_setting BOOLEAN NOT NULL,
-  timestamp TIMESTAMP NOT NULL,
   url TEXT NOT NULL UNIQUE,
   number_of_questions INTEGER NOT NULL
 );

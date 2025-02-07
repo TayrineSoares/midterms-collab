@@ -1,7 +1,7 @@
-INSERT INTO quizzes (title, privacy_setting, timestamp, url, number_of_questions)
+INSERT INTO quizzes (title, privacy_setting, url, number_of_questions)
 VALUES
-  ('Math Quiz', TRUE, '2023-10-01', 'https://example.com/quiz/1', 5),
-  ('Science Quiz', FALSE, '2023-10-02', 'https://example.com/quiz/2', 7)
+  ('Math Quiz', TRUE, 'https://example.com/quiz/1', 5),
+  ('Science Quiz', FALSE, 'https://example.com/quiz/2', 7)
 ON CONFLICT (url) DO NOTHING;
 
 INSERT INTO questions (quiz_id, question)
