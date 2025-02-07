@@ -7,11 +7,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-<<<<<<< HEAD
-  const { quizTitle, privacySetting } = req.body;
-=======
   const { title, privacy_setting } = req.body;
->>>>>>> 87d6a54e086b715cd50b3fa556879cacaae11742
 
   const quiz = {
     title: title,
@@ -31,15 +27,4 @@ router.post('/', (req, res) => {
     });
 });
 
-<<<<<<< HEAD
-
-router.get('/create/:id', (req, res) => {
-  const quizId = req.params.id;  
-
-  
-  res.render('create', { quizId });
-});
-
-=======
->>>>>>> 87d6a54e086b715cd50b3fa556879cacaae11742
 module.exports = router;
