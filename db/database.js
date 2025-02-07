@@ -128,19 +128,22 @@ const getAnswerForQuestion = function (questionId) {
 
 // Records attempt from taking quiz
 const submitAttempt = function (attempt) {
-  
   const url = `http://localhost:8080/results/${Math.random().toString(36).substring(7)}`;
 
   return db
-    .query(`INSERT INTO attempts (quiz_id, score, total_questions, url) VALUES ($1, $2, $3, $4) RETURNING *`, [attempt.quiz_id, attempt.score, attempt.totalQuestions, url])
+    .query(
+      `INSERT INTO attempts (quiz_id, score, total_questions, url) 
+       VALUES ($1, $2, $3, $4) RETURNING *`,
+      [attempt.quiz_id, attempt.score, attempt.totalQuestions, url]
+    )
     .then((result) => {
-      console.log(`Submited Attempt: `, result.rows[0]);
+      console.log(`Submitted Attempt: `, result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
       console.log('Error submitting attempt: ', err.message);
       throw err;
-    })
+    });
 };
 
 // Records the answers selected by quiz taker
@@ -176,33 +179,41 @@ const submitAnswer = function (attemptId, questionId, selectedAnswerId) {
 // Retrieves quiz attempt by ID
 const getAttemptById = function (attemptId) {
   return db
-    .query(`SELECT * FROM attempts WHERE id = $1`, [attemptId])
+    .query(
+      `SELECT attempts.*, COUNT(attempt_answers.id) AS correct_answers
+       FROM attempts
+       LEFT JOIN attempt_answers ON attempts.id = attempt_answers.attempt_id AND attempt_answers.is_correct = true
+       WHERE attempts.id = $1
+       GROUP BY attempts.id`,
+      [attemptId]
+    )
     .then((result) => {
-      console.log(`Attemp accessed: `, result.rows[0]);
-      return result.rows[0];
+      console.log(`Attempt accessed: `, result.rows[0]);
+      return result.rows[0]; // Returns attempt details with the count of correct answers
     })
     .catch((err) => {
       console.log(`Error accessing attempt: `, err.message);
       throw err;
-    })
+    });
 };
 
 // Retrieves all answers to a quiz attempt
 const getAttemptAnswers = function (attemptId) {
   return db
-    .query(`SELECT attempt_answers.id AS attempt_answer_id, questions.question AS question_text, answers.answer_text AS selected_answer, attempt_answers.is_correct AS answer_correctness
-    FROM attempt_answers
-    JOIN questions ON attempt_answers.question_id = questions.id
-    JOIN answers ON attempt_answers.selected_answer_id = answers.id
-    WHERE attempt_answers.attempt_id = $1`, [attemptId])
+    .query(
+      `SELECT COUNT(*) AS correct_answers
+       FROM attempt_answers
+       WHERE attempt_id = $1 AND is_correct = true`,
+      [attemptId]
+    )
     .then((result) => {
-      console.log(`Attempt answers retrieved: `, result.rows);
-      return result.rowCount;
+      console.log(`Correct answers retrieved: `, result.rows[0]);
+      return result.rows[0].correct_answers; // Return the count of correct answers
     })
     .catch((err) => {
-      console.log(`Error retrieving attempt answers: `, err.message)
+      console.log(`Error retrieving attempt answers: `, err.message);
       throw err;
-    })
+    });
 };
 
 module.exports = { 
