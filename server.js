@@ -23,6 +23,10 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const quizroutes = require('./routes/quiz');
+const createRoutes = require('./routes/create');
+const resultsRoutes = require('./routes/results');
+const publicRoutes = require('./routes/public');
+
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -30,6 +34,10 @@ const quizroutes = require('./routes/quiz');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
+app.use( '/quiz', quizroutes)
+app.use('/create', createRoutes);  // Quiz creation routes
+app.use('/results', resultsRoutes);  // Results related routes
+app.use('/public', publicRoutes);  // Public quizzes routes
 // Note: mount other resources here, using the same pattern above
 
 // Home page
