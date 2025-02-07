@@ -3,10 +3,10 @@ const router = express.Router();
 const db = require('../db/database');
 const { addQuiz } = require('../db/database');
 
-router.get('/', (req, res) => { 
+router.get('/', (req, res) => {
   console.log('/create triggered')
 
-  res.render('create'); 
+  res.render('create');
 });
 
 router.post('/', (req, res) =>{
@@ -25,7 +25,7 @@ router.post('/', (req, res) =>{
 
   //   })
 
-  
+
 
     //res.redirect('/create')
 )
