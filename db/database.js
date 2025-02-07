@@ -29,28 +29,34 @@ const addQuiz = function (quiz) {
   const url = `http://localhost:8080/quiz/${Math.random().toString(36).substring(7)}`;
 
   return db
-    .query(`INSERT INTO quizzes (title, privacy_setting, url) VALUES ($1, $2, $3) RETURNING *`, [quiz.title, quiz.privacy_setting, url])
+    .query(`INSERT INTO quizzes (title, privacy_setting, url, number_of_questions) 
+            VALUES ($1, $2, $3, $4) RETURNING *`, 
+           [quiz.title, quiz.privacy_setting, url, 5])  // Always 5 questions
     .then((result) => {
       console.log(`Quiz added: `, result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
-      console.log('Error adding quiz: ',err.message);
+      console.log('Error adding quiz: ', err.message);
       throw err;
     });
 }
 
-const addQuestion = function (quizId, questionText) {
-  return db
-    .query(`INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING *`, [quizId, questionText])
-    .then((result) => {
-      console.log(`Questions added for quizID ${quizId}: `, result.rows);
-      return result.rows;
+const addQuestions = function (quizId, questions) {
+  const questionPromises = questions.map((questionText) => {
+    return db
+    .query(`INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING *`, [quizId, questionText]);
+  });
+ 
+  return Promise.all(questionPromises)
+    .then((results) => {
+      console.log(`Questions added for quizID ${quizId}: `, results);
+      return results;
     })
     .catch((err) => {
       console.log('Error adding questions: ', err.message);
       throw err;
-    });
+    }); 
 }
 
 const addAnswer = function (questionId, answerText, is_correct) {
@@ -192,7 +198,7 @@ const getAttemptAnswers = function (attemptId) {
 module.exports = { 
   db,
   addQuiz,
-  addQuestion,
+  addQuestions,
   addAnswer,
   getQuizById,
   getQuestionForQuiz,
