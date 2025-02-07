@@ -6,7 +6,7 @@ const { addQuiz } = require('../db/database')
 
 
 
-app.post('/', (req, res) => {
+router.post('/', (req, res) => {
   const { quizTitle, privacySetting } = req.body;
 
   const quiz = {
@@ -29,7 +29,7 @@ app.post('/', (req, res) => {
 });
 
 
-app.get('/create/:id', (req, res) => {
+router.get('/create/:id', (req, res) => {
   const quizId = req.params.id;  
 
   

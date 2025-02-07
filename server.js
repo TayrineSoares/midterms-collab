@@ -26,7 +26,8 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const quizroutes = require('./routes/quiz');
-const createRoutes = require('./routes/create');
+const createRoutes_questions = require('./routes/create-questions');
+const createRoutes_answers = require('./routes/create-answers');
 const resultsRoutes = require('./routes/results');
 const publicRoutes = require('./routes/public');
 const homeRoutes = require('./routes/home');
@@ -39,10 +40,11 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/quiz', quizroutes)
-app.use('/create', createRoutes);  // Quiz creation routes
 app.use('/results', resultsRoutes);  // Results related routes
 app.use('/public', publicRoutes);  // Public quizzes routes
 app.use('/home', homeRoutes);
+app.use('/create-questions',createRoutes_questions);
+app.use('/create-answers', createRoutes_answers);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
