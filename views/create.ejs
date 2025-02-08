@@ -38,194 +38,218 @@
   <%- include('partials/_header.ejs') %>
 
 
-
   <!-- Main content -->
   <div class="unique-quiz-main">
     <section class="unique-quiz-title">
 
-
     <!-- QUIZ TITLE: embeded "title" comes from the create route -->
     <h1>Quiz Title: <%= title %> </h1>
+
     <!-- Display Privacy Setting -->
     <!--TERNARY OPERATOR: If privacy is true (private), it will display "Private"-->
     <p>Privacy: <%= privacy ? 'Private' : 'Public' %></p>
-
-    <!-- INSERT CODE TO DISPLAY EXISTING QUESTIONS HERE -->
-
     </section>
 
 
-    <!-- Form to add 05 questions -->
-    <!-- <section class="add-question-text">
-      <h1>Add 5 questions</h1>
-    </section> -->
+    <!-- FORM TO ADD 05 QUESTIONS -->
 
-    <!--ADD QUESTION BUTTON/FORM -->
-    <!--When the "Add Question" button is clicked, the form submits the question and answers to the server using POST.-->
-    <!--The server saves the questions to the database and redirects the user CONFIRME ROUTE WHERE ARE WE REDIRECTING THE USER? -->
+    <!--BILL AND DRO I NEED YOU HERE -->
 
-    <!-- 01 THE ACTION SHOULD CONTAIN EJS FROM THE BACKEND  -->
-    <!-- UPDATE THE ACTION ACCORDING TO BACKEND WHEN THEY ARE AVAILABLE  -->
+    <!--When the SUBMIT button is clicked, the form submits ALL QUESTIONS AND ANSWERS to the server using POST.-->
+    <!--The server saves the questions to the database and redirects the user THE QUIZ PAGE /quiz/:quizId -->
+    <!--THE ACTION FOR THE POST METHOD IS ON create/:quizId -->
+    <!-- THE REDIRECT (TO BE HANDLED IN THE ROUTE) IS TO quiz/:quizId-->
 
-    <form class="questions-form" action="/create:id" method="POST">
+    <form class="questions-form" action="/create/<%= quizId %>" method="POST">
 
-      <!--QUESTION 01-->
+      <!-----------QUESTION 1----------------->
+      <!--The questions[0] format allows us to group all questions in an array QUESTIONS -->
       <h2>Question 1</h2>
-      <textarea name="question1" id="question1" required placeholder="Enter Question 1"></textarea>
+      <textarea name="questions[0]" id="question1" required placeholder="Enter Question 1"></textarea>
 
       <div class="label-for-answers">
       <p>Correct answer</p>
       </div>
 
+      <!-- radio buttons having the SAME NAME is what makes the user able select only 1 option -->
+      <!-- When the user selects one of the radio buttons, the backend receives the VALUE in the form.-->
+      <!--The selected radio button’s VALUE will be sent as part of the form submission. (One of the key-values of the object in answers[0])-->
+
+      <!--answers[0] format allows us to group all answers in an array of objects ANSWERS-->
+      <!--ANSWER 1-->
       <div class="answer-group">
-        <input type="text" name="answer1-1" id="answer1-1" required placeholder="Enter answer 1" />
-        <input type="radio" name="correct-answer1" value="answer1-1" class="answer-radio" />
+        <input type="text" name="answers[0].answer1" id="answer1-1" required placeholder="Enter answer 1" />
+        <input type="radio" name="answers[0].correct" value="answer1" class="answer-radio" />
       </div>
 
+      <!--ANSWER 2-->
       <div class="answer-group">
-        <input type="text" name="answer1-2" id="answer1-2" required placeholder="Enter answer 2" />
-        <input type="radio" name="correct-answer1" value="answer1-2" class="answer-radio" /> <!-- radio buttons having the same name is what makes the user to be able select only 1 option -->
+        <input type="text" name="answers[0].answer2" id="answer1-2" required placeholder="Enter answer 2" />
+        <input type="radio" name="answers[0].correct" value="answer2" class="answer-radio" />
       </div>
 
+      <!--ANSWER 3-->
       <div class="answer-group">
-        <input type="text" name="answer1-3" id="answer1-3" required placeholder="Enter answer 3" />
-        <input type="radio" name="correct-answer1" value="answer1-3" class="answer-radio" />
+        <input type="text" name="answers[0].answer3" id="answer1-3" required placeholder="Enter answer 3" />
+        <input type="radio" name="answers[0].correct" value="answer3" class="answer-radio" />
       </div>
 
+      <!--ANSWER 4-->
       <div class="answer-group">
-      <input type="text" name="answer1-4" id="answer1-4" required placeholder="Enter answer 4" />
-      <input type="radio" name="correct-answer1" value="answer1-4" class="answer-radio" />
+        <input type="text" name="answers[0].answer4" id="answer1-4" required placeholder="Enter answer 4" />
+        <input type="radio" name="answers[0].correct" value="answer4" class="answer-radio" />
       </div>
 
       <!--LINE TO SEPARATE QUESTIONS-->
       <hr>
 
-      <!--QUESTION 02-->
+      <!-----------QUESTION 2----------------->
       <h2>Question 2</h2>
-      <textarea name="question2" id="question2" required placeholder="Enter Question 2"></textarea>
+      <textarea name="questions[1]" id="question2" required placeholder="Enter Question 2"></textarea>
 
       <div class="label-for-answers">
       <p>Correct answer</p>
       </div>
 
+      <!--ANSWER 1-->
       <div class="answer-group">
-        <input type="text" name="answer2-1" id="answer2-1" required placeholder="Enter answer 1" />
-        <input type="radio" name="correct-answer2" value="answer2-1" class="answer-radio" />
+        <input type="text" name="answers[1].answer1" id="answer2-1" required placeholder="Enter answer 1" />
+        <input type="radio" name="answers[1].correct" value="answer1" class="answer-radio" />
       </div>
 
+      <!--ANSWER 2-->
       <div class="answer-group">
-        <input type="text" name="answer2-2" id="answer2-2" required placeholder="Enter answer 2" />
-        <input type="radio" name="correct-answer2" value="answer2-2" class="answer-radio" /> <!-- radio buttons having the same name is what makes the user to be able select only 1 option -->
+        <input type="text" name="answers[1].answer2" id="answer2-2" required placeholder="Enter answer 2" />
+        <input type="radio" name="answers[1].correct" value="answer2" class="answer-radio" />
       </div>
 
+      <!--ANSWER 3-->
       <div class="answer-group">
-        <input type="text" name="answer2-3" id="answer2-3" required placeholder="Enter answer 3" />
-        <input type="radio" name="correct-answer2" value="answer2-3" class="answer-radio" />
+        <input type="text" name="answers[1].answer3" id="answer2-3" required placeholder="Enter answer 3" />
+        <input type="radio" name="answers[1].correct" value="answer3" class="answer-radio" />
       </div>
 
+      <!--ANSWER 4-->
       <div class="answer-group">
-      <input type="text" name="answer2-4" id="answer2-4" required placeholder="Enter answer 4" />
-      <input type="radio" name="correct-answer2" value="answer2-4" class="answer-radio" />
+        <input type="text" name="answers[1].answer4" id="answer2-4" required placeholder="Enter answer 4" />
+        <input type="radio" name="answers[1].correct" value="answer4" class="answer-radio" />
       </div>
 
       <!--LINE TO SEPARATE QUESTIONS-->
       <hr>
 
-      <!--QUESTION 03-->
+
+      <!-----------QUESTION 3----------------->
       <h2>Question 3</h2>
-      <textarea name="question3" id="question3" required placeholder="Enter Question 3"></textarea>
+      <textarea name="questions[2]" id="question3" required placeholder="Enter Question 3"></textarea>
 
       <div class="label-for-answers">
       <p>Correct answer</p>
       </div>
 
+      <!--ANSWER 1-->
       <div class="answer-group">
-        <input type="text" name="answer3-1" id="answer3-1" required placeholder="Enter answer 1" />
-        <input type="radio" name="correct-answer3" value="answer3-1" class="answer-radio" />
+        <input type="text" name="answers[2].answer1" id="answer3-1" required placeholder="Enter answer 1" />
+        <input type="radio" name="answers[2].correct" value="answer1" class="answer-radio" />
       </div>
 
+      <!--ANSWER 2-->
       <div class="answer-group">
-        <input type="text" name="answer3-2" id="answer3-2" required placeholder="Enter answer 2" />
-        <input type="radio" name="correct-answer3" value="answer3-2" class="answer-radio" /> <!-- radio buttons having the same name is what makes the user to be able select only 1 option -->
+        <input type="text" name="answers[2].answer2" id="answer3-2" required placeholder="Enter answer 2" />
+        <input type="radio" name="answers[2].correct" value="answer2" class="answer-radio" />
       </div>
 
+      <!--ANSWER 3-->
       <div class="answer-group">
-        <input type="text" name="answer3-3" id="answer3-3" required placeholder="Enter answer 3" />
-        <input type="radio" name="correct-answer3" value="answer3-3" class="answer-radio" />
+        <input type="text" name="answers[2].answer3" id="answer3-3" required placeholder="Enter answer 3" />
+        <input type="radio" name="answers[2].correct" value="answer3" class="answer-radio" />
       </div>
 
+      <!--ANSWER 4-->
       <div class="answer-group">
-      <input type="text" name="answer3-4" id="answer3-4" required placeholder="Enter answer 4" />
-      <input type="radio" name="correct-answer3" value="answer3-4" class="answer-radio" />
+        <input type="text" name="answers[2].answer4" id="answer3-4" required placeholder="Enter answer 4" />
+        <input type="radio" name="answers[2].correct" value="answer4" class="answer-radio" />
       </div>
 
       <!--LINE TO SEPARATE QUESTIONS-->
       <hr>
 
-      <!--QUESTION 04-->
+      <!-----------QUESTION 4----------------->
       <h2>Question 4</h2>
-      <textarea name="question4" id="question4" required placeholder="Enter Question 4"></textarea>
+      <textarea name="questions[3]" id="question4" required placeholder="Enter Question 4"></textarea>
 
       <div class="label-for-answers">
       <p>Correct answer</p>
       </div>
 
+      <!--ANSWER 1-->
       <div class="answer-group">
-        <input type="text" name="answer4-1" id="answer4-1" required placeholder="Enter answer 1" />
-        <input type="radio" name="correct-answer4" value="answer4-1" class="answer-radio" />
+        <input type="text" name="answers[3].answer1" id="answer4-1" required placeholder="Enter answer 1" />
+        <input type="radio" name="answers[3].correct" value="answer1" class="answer-radio" />
       </div>
 
+      <!--ANSWER 2-->
       <div class="answer-group">
-        <input type="text" name="answer4-2" id="answer4-2" required placeholder="Enter answer 2" />
-        <input type="radio" name="correct-answer4" value="answer4-2" class="answer-radio" /> <!-- radio buttons having the same name is what makes the user to be able select only 1 option -->
+        <input type="text" name="answers[3].answer2" id="answer4-2" required placeholder="Enter answer 2" />
+        <input type="radio" name="answers[3].correct" value="answer2" class="answer-radio" />
       </div>
 
+      <!--ANSWER 3-->
       <div class="answer-group">
-        <input type="text" name="answer4-3" id="answer4-3" required placeholder="Enter answer 3" />
-        <input type="radio" name="correct-answer4" value="answer4-3" class="answer-radio" />
+        <input type="text" name="answers[3].answer3" id="answer4-3" required placeholder="Enter answer 3" />
+        <input type="radio" name="answers[3].correct" value="answer3" class="answer-radio" />
       </div>
 
+      <!--ANSWER 4-->
       <div class="answer-group">
-      <input type="text" name="answer4-4" id="answer4-4" required placeholder="Enter answer 4" />
-      <input type="radio" name="correct-answer4" value="answer4-4" class="answer-radio" />
+        <input type="text" name="answers[3].answer4" id="answer4-4" required placeholder="Enter answer 4" />
+        <input type="radio" name="answers[3].correct" value="answer4" class="answer-radio" />
       </div>
 
       <!--LINE TO SEPARATE QUESTIONS-->
       <hr>
 
-      <!--QUESTION 05-->
+      <!-----------QUESTION 5----------------->
       <h2>Question 5</h2>
-      <textarea name="question5" id="question5" required placeholder="Enter Question 5"></textarea>
+      <textarea name="questions[4]" id="question5" required placeholder="Enter Question 5"></textarea>
 
       <div class="label-for-answers">
       <p>Correct answer</p>
       </div>
 
+      <!--ANSWER 1-->
       <div class="answer-group">
-        <input type="text" name="answer5-1" id="answer5-1" required placeholder="Enter answer 1" />
-        <input type="radio" name="correct-answer5" value="answer5-1" class="answer-radio" />
+        <input type="text" name="answers[4].answer1" id="answer5-1" required placeholder="Enter answer 1" />
+        <input type="radio" name="answers[4].correct" value="answer1" class="answer-radio" />
       </div>
 
+      <!--ANSWER 2-->
       <div class="answer-group">
-        <input type="text" name="answer5-2" id="answer5-2" required placeholder="Enter answer 2" />
-        <input type="radio" name="correct-answer5" value="answer5-2" class="answer-radio" /> <!-- radio buttons having the same name is what makes the user to be able select only 1 option -->
+        <input type="text" name="answers[4].answer2" id="answer5-2" required placeholder="Enter answer 2" />
+        <input type="radio" name="answers[4].correct" value="answer2" class="answer-radio" />
       </div>
 
+      <!--ANSWER 3-->
       <div class="answer-group">
-        <input type="text" name="answer5-3" id="answer5-3" required placeholder="Enter answer 3" />
-        <input type="radio" name="correct-answer5" value="answer5-3" class="answer-radio" />
+        <input type="text" name="answers[4].answer3" id="answer5-3" required placeholder="Enter answer 3" />
+        <input type="radio" name="answers[4].correct" value="answer3" class="answer-radio" />
       </div>
 
+      <!--ANSWER 4-->
       <div class="answer-group">
-      <input type="text" name="answer5-4" id="answer5-4" required placeholder="Enter answer 4" />
-      <input type="radio" name="correct-answer5" value="answer5-4" class="answer-radio" />
+        <input type="text" name="answers[4].answer4" id="answer5-4" required placeholder="Enter answer 4" />
+        <input type="radio" name="answers[4].correct" value="answer4" class="answer-radio" />
       </div>
 
       <!--LINE TO SEPARATE QUESTIONS-->
       <hr>
 
 
-      <!--ADD QUESTION BUTTON/FORM -->
+
+
+
+
+      <!--GENERATE QUIZ BUTTON (FORM SUBMISSION) -->
       <button id="generate-quiz-btn" type="submit">Generate Quiz</button>
     </form>
 

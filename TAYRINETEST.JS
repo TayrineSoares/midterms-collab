@@ -1,10 +1,10 @@
 // I AM GOING TO DELETE THIS FILE AT THE END OF THE PROJECT
 
 
-
 // FIXING THE CREATE ROUTE TO FETCH QUIZ TITLE AND PRIVACY AND SEND INFO TO EJS
 router.get('/:quizId', (req, res) => {
   const { quizId } = req.params;
+
   // First, get the quiz details (title)
   getQuizById(quizId)
     .then((quiz) => {
@@ -25,19 +25,33 @@ router.get('/:quizId', (req, res) => {
     });
 });
 
-// OLD ROUTE
-// Route to display the create questions and answers page for a given quiz
-router.get('/:quizId', (req, res) => {
-  const { quizId } = req.params;
 
-  // Retrieve existing questions from the database for the quiz
-  getQuestionForQuiz(quizId)
-    .then((questions) => {
-      // Render the page with existing questions and answers input form
-      res.render('create', { quizId, questions });
-    })
-    .catch((err) => {
-      console.error('Error retrieving questions:', err.message);
-      res.status(500).send({ error: 'Error retrieving questions', details: err.message });
-    });
-});
+
+
+// How back end receives info from the questions form
+// we could use array indexes to match questions and answers
+// questions[0] = Question 1; answers[0] = Answers for Question 1
+
+{
+  questions: [
+    "What is the capital of France?",  // Question 1
+    "What is the largest planet?",    // Question 2
+  ],
+
+  answers: [
+    {
+      answer1: "Paris", // Answer 1 for Question 1
+      answer2: "Berlin",
+      answer3: "Madrid",
+      answer4: "Rome",
+      correct: "answer1"  // Correct answer for Question 1 (selected answer)
+    },
+    {
+      answer1: "Jupiter", // Answer 1 for Question 2
+      answer2: "Saturn",
+      answer3: "Mars",
+      answer4: "Earth",
+      correct: "answer1"   // Correct answer for Question 2 (selected answer)
+    },
+  ]
+}
