@@ -33,11 +33,9 @@ const addQuiz = function (quiz) {
             VALUES ($1, $2, $3, $4) RETURNING *`, 
            [quiz.title, quiz.privacy_setting, url, 5])  // Always 5 questions
     .then((result) => {
-      console.log(`Quiz added: `, result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
-      console.log('Error adding quiz: ', err.message);
       throw err;
     });
 }
@@ -52,11 +50,9 @@ const addQuestions = function (quizId, questions) {
   // Execute all question insertion queries concurrently and handle results or errors
   return Promise.all(questionPromises)
     .then((results) => {
-      console.log(`Questions added for quizID ${quizId}: `, results);
       return results;
     })
     .catch((err) => {
-      console.log('Error adding questions: ', err.message);
       throw err;
     });
 };
@@ -73,11 +69,9 @@ const addAnswers = function (quizId, answers) {
 
   return Promise.all(answerPromises)
     .then((results) => {
-      console.log(`Answers added for quiz ID ${quizId}:`, results);
       return results;
     })
     .catch((err) => {
-      console.log('Error adding answers:', err.message);
       throw err;
     });
 };
@@ -88,38 +82,32 @@ const getQuizById = function (quizId) {
   return db
     .query(`SELECT * FROM quizzes WHERE id = $1`, [quizId])
     .then((result) => {
-      console.log('Quiz accessed: ', result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
-      console.log('Error accessing quiz: ', err.message);
       throw err;
     })
 };
 
-const getQuestionForQuiz = function (quizId) {
+const getQuestionsForQuiz = function (quizId) {
   return db
     .query(`SELECT * FROM questions WHERE quiz_id = $1`, [quizId])
     .then((result) => {
-      console.log(`Questions from quizID ${quizId}: `, result.rows);
       return result.rows;
     })
     .catch((err) => {
-      console.log('Error retrieving questions: ', err.message);
       throw err;
     });
 
 };
 
-const getAnswerForQuestion = function (questionId) {
+const getAnswersForQuiz = function (quizId) {
   return db
-    .query(`SELECT * FROM answers WHERE question_id = $1`, [questionId])
+    .query(`SELECT * FROM answers WHERE question_id = $1`, [quizId])
     .then((result) => {
-      console.log(`Answers from questionID ${questionId}`, result.rows);
       return result.rows;
     })
     .catch((err) => {
-      console.log('Error retrieving answers: ', err.message);
       throw err;
     });
 };
@@ -137,11 +125,9 @@ const submitAttempt = function (attempt) {
       [attempt.quiz_id, attempt.score, attempt.totalQuestions, url]
     )
     .then((result) => {
-      console.log(`Submitted Attempt: `, result.rows[0]);
       return result.rows[0];
     })
     .catch((err) => {
-      console.log('Error submitting attempt: ', err.message);
       throw err;
     });
 };
@@ -160,16 +146,13 @@ const submitAnswer = function (attemptId, questionId, selectedAnswerId) {
           [attemptId, questionId, selectedAnswerId, isCorrect]
         )
         .then((result) => {
-          console.log(`Submitted Answer: `, result.rows[0]);
           return result.rows[0];
         })
         .catch((err) => {
-          console.error(`Error submitting answer: `, err.message);
           throw err;
         });
     })
     .catch((err) => {
-      console.error(`Error fetching answer correctness: `, err.message);
       throw err;
     });
 };
@@ -188,11 +171,9 @@ const getAttemptById = function (attemptId) {
       [attemptId]
     )
     .then((result) => {
-      console.log(`Attempt accessed: `, result.rows[0]);
       return result.rows[0]; // Returns attempt details with the count of correct answers
     })
     .catch((err) => {
-      console.log(`Error accessing attempt: `, err.message);
       throw err;
     });
 };
@@ -207,11 +188,9 @@ const getAttemptAnswers = function (attemptId) {
       [attemptId]
     )
     .then((result) => {
-      console.log(`Correct answers retrieved: `, result.rows[0]);
       return result.rows[0].correct_answers; // Return the count of correct answers
     })
     .catch((err) => {
-      console.log(`Error retrieving attempt answers: `, err.message);
       throw err;
     });
 };
@@ -222,10 +201,10 @@ module.exports = {
   addQuestions,
   addAnswers,
   getQuizById,
-  getQuestionForQuiz,
-  getAnswerForQuestion,
+  getQuestionsForQuiz,
+  getAnswersForQuiz,
   submitAttempt,
   submitAnswer,
   getAttemptById,
-  getAttemptAnswers
+  getAttemptAnswers,
 };
