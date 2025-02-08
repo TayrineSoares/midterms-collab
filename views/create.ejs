@@ -52,15 +52,12 @@
 
 
     <!-- FORM TO ADD 05 QUESTIONS -->
-
-    <!--BILL AND DRO I NEED YOU HERE -->
-
     <!--When the SUBMIT button is clicked, the form submits ALL QUESTIONS AND ANSWERS to the server using POST.-->
-    <!--The server saves the questions to the database and redirects the user THE QUIZ PAGE /quiz/:quizId -->
+    <!--The server saves the questions to the database and redirects the user THE QUIZ PAGE /quiz/create/:quizId -->
     <!--THE ACTION FOR THE POST METHOD IS ON create/:quizId -->
     <!-- THE REDIRECT (TO BE HANDLED IN THE ROUTE) IS TO quiz/:quizId-->
 
-    <form class="questions-form" action="/create/<%= quizId %>" method="POST">
+    <form class="questions-form" action="/quiz/create/<%= quizId %>" method="POST">
 
       <!-----------QUESTION 1----------------->
       <!--The questions[0] format allows us to group all questions in an array QUESTIONS -->
