@@ -53,11 +53,13 @@
         <option value="" disabled selected>Quiz Privacy</option>
         <option value="public">Public</option>
         <option value="private">Private</option>
-      </select>
+        </select>
+
 
       <button type="submit" id="new-quiz-btn">Start new quiz</button>
+
+      </form>
     </section>
-    </form>
 
     <!-- Public Quizzes section -->
     <section class="public-quizzes-container">
@@ -66,22 +68,38 @@
       <!-- For now using text for styling purposes -->
       <!-- Retrieve quizzes from DB later -->
       <section class="public-quizzes">
-        <h1>Public Quiz 1</h1>
-        <h1>Public Quiz 2</h1>
-        <h1>Public Quiz 3</h1>
+
+        <!-- Quiz 1 -->
+        <div class="quiz-card">
+          <h2>Quiz 1</h2>
+          <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+          <a href="/quiz/1" class="quiz-btn">Take Quiz</a>
+        </div>
+
+
+        <!-- Quiz 2 -->
+        <div class="quiz-card">
+          <h2>Quiz 2</h2>
+          <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+          <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
+        </div>
+
+         <!-- Quiz 3 -->
+         <div class="quiz-card">
+          <h2>Quiz 3</h2>
+          <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+          <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
+        </div>
+
+
       </section>
+
+
 
     <!--ADD EVENT LISTENER FOR THE CLICK-->
     <button type="button" id="all-public-quizzes-btn">See All Public Quizzes</button>
 
-
-
-
-      <a href="public">
-        <button type="button" id="all-public-quizzes-btn">See All Public Quizzes</button>
-      </a>
     </section>
-
 
   </div>
 

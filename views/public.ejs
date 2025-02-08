@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>All public quizzes</title>
+  <title>All Public Quizzes</title>
   <!-- Given code -->
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -15,7 +16,9 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
   <link rel="stylesheet" href="/styles/index.css" />
+  <link rel="stylesheet" href="/styles/public.css" />
 
+  <!-- JQUERY -->
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
 </head>
@@ -34,9 +37,23 @@
 
 
   <!-- Main content -->
-  <div>
+  <div class="all-public-quizzes">
+    <h1 style="text-align: center;">All Quizzes</h1>
 
-  </div>
+    <!-- Quiz 1 -->
+    <div class="quiz-card">
+      <h2>Quiz 1</h2>
+      <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+      <a href="/quiz/1" class="quiz-btn">Take Quiz</a>
+    </div>
+
+    
+    <!-- Quiz 2 -->
+    <div class="quiz-card">
+      <h2>Quiz 2</h2>
+      <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+      <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
+    </div>
 
 
   <!-- Footer (fixed) -->

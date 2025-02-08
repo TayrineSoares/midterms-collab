@@ -1,0 +1,29 @@
+.all-public-quizzes {
+  width: 50%;
+}
+
+
+.quiz-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 50px;
+}
+
+
+.quiz-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.quiz-btn:hover {
+  background: #0056b3;
+}

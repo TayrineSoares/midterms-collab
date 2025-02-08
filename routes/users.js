@@ -10,7 +10,7 @@ const router  = express.Router();
 
 /* REMEMBER TO SET THIS BACK TO USERS */
 router.get('/', (req, res) => {
-  res.render('results');
+  res.render('create');
 });
 
 module.exports = router;
