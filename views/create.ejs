@@ -3,8 +3,10 @@
 <head>
 
 
-  <!-- ADD THE QUIZ TITLE HERE -->
-  <title>Quiz TITLE</title>
+  <!-- QUIZ TITLE: embeded "title" comes from the create route -->
+  <!--If the title is "Math Quiz", the browser tab will display Creating Quiz: Math Quiz.-->
+  <title>Creating Quiz: <%= title %></title>
+
   <!-- Given code -->
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -40,11 +42,13 @@
   <!-- Main content -->
   <div class="unique-quiz-main">
     <section class="unique-quiz-title">
-    <!-- quizTitle and quizPrivacy variables will come from the -->
-    <!-- POST request that handles the form submission-->
-    <!--UPDATE THIS LINES AFTER quizTitle and quizPrivacy ARE DEFINED-->
-    <h1>Quiz Title: add embeded quizTitle here </h1>
-    <p>Privacy: add embeded quizPrivacy here </p>
+
+
+    <!-- QUIZ TITLE: embeded "title" comes from the create route -->
+    <h1>Quiz Title: <%= title %> </h1>
+    <!-- Display Privacy Setting -->
+    <!--TERNARY OPERATOR: If privacy is true (private), it will display "Private"-->
+    <p>Privacy: <%= privacy ? 'Private' : 'Public' %></p>
 
     <!-- INSERT CODE TO DISPLAY EXISTING QUESTIONS HERE -->
 
