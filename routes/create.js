@@ -3,8 +3,11 @@ const router = express.Router();
 const { addQuestions, addAnswers, getQuestionForQuiz } = require('../db/database');
 
 // Route to display the create questions and answers page for a given quiz
+
 router.get('/:quizId', (req, res) => {
   const { quizId } = req.params;
+//ADD THE getQuizById function
+// SEND TITLE AND PRIVACY TO
 
   // Retrieve existing questions from the database for the quiz
   getQuestionForQuiz(quizId)

@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' }); 
+require('dotenv').config({ path: '../.env' });
 
 // PG database client/database setup
 const { Pool } = require('pg');
@@ -29,9 +29,9 @@ const addQuiz = function (quiz) {
   const url = `http://localhost:8080/quiz/${Math.random().toString(36).substring(7)}`;
 
   return db
-    .query(`INSERT INTO quizzes (title, privacy_setting, url, number_of_questions) 
-            VALUES ($1, $2, $3, $4) RETURNING *`, 
-           [quiz.title, quiz.privacy_setting, url, 5])  // Always 5 questions
+    .query(`INSERT INTO quizzes (title, privacy_setting, url)
+            VALUES ($1, $2, $3) RETURNING *`,
+           [quiz.title, quiz.privacy_setting, url])  // Always 5 questions
     .then((result) => {
       console.log(`Quiz added: `, result.rows[0]);
       return result.rows[0];
@@ -65,7 +65,7 @@ const addAnswers = function (quizId, answers) {
   const answerPromises = answers.map((answer) => {
     const { questionId, answer_text, is_correct } = answer;
     return db.query(
-      `INSERT INTO answers (question_id, answer_text, is_correct) 
+      `INSERT INTO answers (question_id, answer_text, is_correct)
        VALUES ($1, $2, $3) RETURNING *`,
       [questionId, answer_text, is_correct]
     );
@@ -132,7 +132,7 @@ const submitAttempt = function (attempt) {
 
   return db
     .query(
-      `INSERT INTO attempts (quiz_id, score, total_questions, url) 
+      `INSERT INTO attempts (quiz_id, score, total_questions, url)
        VALUES ($1, $2, $3, $4) RETURNING *`,
       [attempt.quiz_id, attempt.score, attempt.totalQuestions, url]
     )
@@ -216,7 +216,7 @@ const getAttemptAnswers = function (attemptId) {
     });
 };
 
-module.exports = { 
+module.exports = {
   db,
   addQuiz,
   addQuestions,
