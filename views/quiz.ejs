@@ -1,141 +1,36 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- ADD THE EMBEDED QUIZ TITLE HERE -->
-  <title>Quiz Title</title>
-
-  <!-- Given code -->
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-   <!-- Given code -->
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-
-
-  <!-- Link CSS Files -->
+  <title>Quiz: <%= title %></title>
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
   <link rel="stylesheet" href="/styles/quiz.css" />
-  <link rel="stylesheet" href="/styles/create.css" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
 </head>
-
-<!-- Google Fonts ('Nunito', sans-serif;)-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
-
-
-
 <body>
-  <!-- Top nav bar (fixed) -->
   <%- include('partials/_header.ejs') %>
 
+  <div class="quiz-main">
+    <h1>Quiz Title: <%= title %></h1>
+    <p>Privacy: <%= privacySetting ? 'Private' : 'Public' %></p>
 
-  <!-- Main content -->
-  <div class="unique-quiz-main">
-    <section class="unique-quiz-title">
-      <!-- quizTitle and quizPrivacy variables will come from the -->
-      <!-- POST request that handles the form submission-->
-      <!--UPDATE THIS LINES AFTER quizTitle and quizPrivacy ARE DEFINED-->
-      <h1>Quiz Title: add embeded quizTitle here </h1>
-      <p>Privacy: add embeded quizPrivacy here </p>
-    </section>
-
-
-
-    <!-- INSERT CODE TO DISPLAY EXISTING QUESTIONS HERE -->
-    <!-- The idea is to Loop through each question in the quiz -->
-
-    <!------------------------------------------------------------------------->
-
-    <!-- Form for quiz submission -->
-    <!-- NOT SURE ABOUT THE ACTION HERE-->
-
-    <form action="/results:id" method="POST">
-
-      <!-- HARD CODING QUESTIONS FOR LAYOUT PURPOSES-->
-      <section class="all-questions">
-
-        <!-- First Question -->
-        <div class="question">
-          <h3>Question 1: Bacon ipsum dolor amet spare ribs tenderloin doner ground round. </h3>
-
-          <!-- Answer 1 -->
-          <div class="answer-options">
-            <input type="radio" class="answer-radio" name="question-1"  value="answer-1" id="answer-1-1" />
-            <p>T-bone jowl reprehenderit ipsum picanha.</p>
-          </div>
-
-          <!-- Answer 2 -->
-          <div class="answer-options">
-            <input type="radio" class="answer-radio" name="question-1"  value="answer-2" id="answer-1-2" />
-            <p>T-bone jowl reprehenderit ipsum picanha.</p>
-          </div>
-
-          <!-- Answer 3 -->
-          <div class="answer-options">
-            <input type="radio" class="answer-radio" name="question-1"  value="answer-3" id="answer-1-3" />
-            <p>T-bone jowl reprehenderit ipsum picanha.</p>
-          </div>
-
-          <!-- Answer 4 -->
-          <div class="answer-options">
-            <input type="radio" class="answer-radio" name="question-1"  value="answer-4" id="answer-1-4" />
-            <p>T-bone jowl reprehenderit ipsum picanha.</p>
-          </div>
-        </div>
-
-        <!-- Second Question -->
-        <div class="question">
-          <h3>Question 2: Burgdoggen pancetta sirloin flank, ham quis minim laborum eiusmod ea pork belly picanha ham hock. </h3>
-
-
-        <!-- Answer 1 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-2"  value="answer-1" id="answer-2-1" />
-          <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-        </div>
-
-        <!-- Answer 2 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-2"  value="answer-2" id="answer-2-2" />
-          <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-        </div>
-
-        <!-- Answer 3 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-2"  value="answer-3" id="answer-2-3" />
-          <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-        </div>
-
-        <!-- Answer 4 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-2"  value="answer-4" id="answer-2-4" />
-          <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-        </div>
+    <!-- Display Questions and Answers -->
+    <% questions_and_answers.forEach((qa, index) => { %>
+      <div class="question">
+        <h2>Question <%= index + 1 %>: <%= qa.question %></h2>
+        <ul>
+          <% qa.answers.forEach((answer) => { %>
+            <li>
+              <%= answer.answer_text %>
+              <% if (answer.is_correct) { %>
+                <span class="correct-answer">(Correct)</span>
+              <% } %>
+            </li>
+          <% }) %>
+        </ul>
       </div>
-
-      <!-- Button to Submit Quiz -->
-      <button id="submit-quiz-btn" type="submit" >Finish</button>
-    </form>
-
-    <!-- Button to Copy the Quiz URL -->
-    <button id="copy-quiz-url-btn" type="button">Copy Quiz URL</button>
-
-      </section>
-
+    <% }) %>
   </div>
 
-
-  <!-- Footer (fixed) -->
   <%- include('partials/_footer.ejs') %>
-
-
 </body>
 </html>
