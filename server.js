@@ -29,7 +29,8 @@ const createRoutes = require('./routes/create');
 const resultsRoutes = require('./routes/results');
 const publicRoutes = require('./routes/public');
 const homeRoutes = require('./routes/home');
-const quizRoutes = require('./routes/quizRoutes');
+const quizRoutes = require('./routes/quiz');
+// const viewQuizRoutes = require('./routes/viewQuiz')
 
 
 // Mount all resource routes
@@ -38,11 +39,12 @@ const quizRoutes = require('./routes/quizRoutes');
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/create-quiz', createRoutes);
+app.use('/quiz/create', createRoutes);
 app.use('/results', resultsRoutes); 
 app.use('/public', publicRoutes); 
 app.use('/', homeRoutes);
 app.use('/quiz', quizRoutes);
+// app.use('/viewQuiz', viewQuizRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Warning: avoid creating more routes in this file!
