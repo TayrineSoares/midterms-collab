@@ -29,9 +29,9 @@ const addQuiz = function (quiz) {
   const url = `http://localhost:8080/quiz/${Math.random().toString(36).substring(7)}`;
 
   return db
-    .query(`INSERT INTO quizzes (title, privacy_setting, url, number_of_questions) 
-            VALUES ($1, $2, $3, $4) RETURNING *`, 
-           [quiz.title, quiz.privacy_setting, url, 5])  // Always 5 questions
+    .query(`INSERT INTO quizzes (title, privacy_setting, url) 
+            VALUES ($1, $2, $3) RETURNING *`, 
+           [quiz.title, quiz.privacy_setting, url])  // Always 5 questions
     .then((result) => {
       console.log(`Quiz added: `, result.rows[0]);
       return result.rows[0];
