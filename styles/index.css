@@ -26,8 +26,7 @@
 
 }
 
-#quiz-title,
-#number-of-questions {
+#quiz-title {
   padding: 0.5em;
   margin: 0.5em;
   height: 40px;
@@ -54,6 +53,34 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  padding: 0 50px 0 50px; /* the order is: top, right, bottom, left*/
+
+}
+
+
+.quiz-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin: 50px;
+  width: 20%;
+}
+
+.quiz-btn {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #007BFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.quiz-btn:hover {
+  background: #0056b3;
 }
 
 
