@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const { getQuizById, getQuestionsForQuiz, getAnswersForQuiz } = require('../db/database');
 
-<<<<<<< Updated upstream
+
 // Route to display the quiz details page
 router.get('/:id', (req, res) => {
   const quizId = req.params.id;

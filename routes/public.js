@@ -20,7 +20,7 @@ router.get('/:id', (req, res) => {
         quiz,
         questions,
         answers,
-        title: quiz.title,quiz }); 
+        title: quiz.title }); 
     })
     .catch((err) => {
       console.error('Error fetching quiz:', err.message);
