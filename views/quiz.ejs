@@ -5,31 +5,44 @@
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
   <link rel="stylesheet" href="/styles/quiz.css" />
+  <link rel="stylesheet" href="/styles/create.css" />
 </head>
 <body>
   <%- include('partials/_header.ejs') %>
 
-  <div class="quiz-main">
+  <div class="unique-quiz-main">
+    <section class="unique-quiz-title">
     <h1>Quiz Title: <%= title %></h1>
     <p>Privacy: <%= privacySetting ? 'Private' : 'Public' %></p>
+    </section>
 
     <!-- Display Questions and Answers -->
-    <% questions_and_answers.forEach((qa, index) => { %>
-      <div class="question">
-        <h2>Question <%= index + 1 %>: <%= qa.question %></h2>
-        <ul>
-          <% qa.answers.forEach((answer) => { %>
-            <li>
-              <%= answer.answer_text %>
-              <% if (answer.is_correct) { %>
-                <span class="correct-answer">(Correct)</span>
-              <% } %>
-            </li>
-          <% }) %>
-        </ul>
-      </div>
-    <% }) %>
+    <div class="all-questions"></div>
+      <% questions_and_answers.forEach((qa, index) => { %>
+        <div class="question">
+          <h2>Question <%= index + 1 %>: <%= qa.question %></h2>
+          <ul>
+            <% qa.answers.forEach((answer) => { %>
+              <li>
+                <%= answer.answer_text %>
+                <% if (answer.is_correct) { %>
+                  <span class="correct-answer">(Correct)</span>
+                <% } %>
+              </li>
+            <% }) %>
+          </ul>
+        </div>
+      <% }) %>
+    </div>
+
+
   </div>
+
+<!-- Button to Submit Quiz -->
+<button id="submit-quiz-btn" type="submit" >Finish</button>
+</form>
+<!-- Button to Copy the Quiz URL -->
+<button id="copy-quiz-url-btn" type="button">Copy Quiz URL</button>
 
   <%- include('partials/_footer.ejs') %>
 </body>
