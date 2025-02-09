@@ -1,21 +1,35 @@
 const express = require('express');
 const router = express.Router();
+const { getQuizById } = require('../db/database');
 
 
-// GET route to show the results page
 router.get('/', (req, res) => {
-  res.render('results'); // Render the results page (replace with your actual results page)
+  res.render('results'); 
+
+
+});
+router.get('/:id', (req, res) => {
+  const quizId = req.params.id; 
+
+  getQuizById(quizId)
+    .then((quiz) => {
+      if (!quiz) {
+        return res.status(404).send('Quiz not found'); 
+      }
+      res.render('results', { 
+        quiz,
+        questions,
+        answers,
+        title: quiz.title }); 
+    })
+    .catch((err) => {
+      console.error('Error fetching quiz:', err.message);
+      res.status(500).send('Server error'); 
+    });
 });
 
-// POST route for submitting the results
 router.post('/results', (req, res) => {
- // const goBack = req.body.goBack;
-
- // if (goBack === 'backtoresults') {
-  //  res.redirect('/results'); // Redirect to results page
-  //} else if (goBack === 'backhome') {
-   // res.redirect('/'); // Redirect to homepage
-  //}
+  res.render('results'); 
 });
 
 module.exports = router;

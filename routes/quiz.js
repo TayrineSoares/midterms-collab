@@ -1,18 +1,38 @@
 const express = require('express');
-const router = express.Router();
+const router  = express.Router();
 const { getQuizById, getQuestionsForQuiz, getAnswersForQuiz } = require('../db/database');
+
+<<<<<<< Updated upstream
+// Route to display the quiz details page
+router.get('/:quizId', (req, res) => {
+  const { quizId } = req.params;
+=======
+router.post('/', (req, res) => {
+
+  res.redirect('/quiz');
+});
+
+
+router.get('/', (req, res) => {
+
+  res.render('quiz');
+});
+
+router.get('/:id', (req, res) => {
+>>>>>>> Stashed changes
+
+})
+
 
 // Route to display the quiz details page
 router.get('/:quizId', (req, res) => {
   const { quizId } = req.params;
-
   // Fetch the quiz by ID
   getQuizById(quizId)
     .then((quiz) => {
       if (!quiz) {
         return res.status(404).send('Quiz not found');
       }
-
       // Fetch questions and answers for this quiz
       Promise.all([
         getQuestionsForQuiz(quizId),
