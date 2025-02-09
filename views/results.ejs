@@ -40,8 +40,10 @@
 
       <!-- MAKE SURE TITLE WORKS -->
       <h1>Quiz Title: <%= title %> </h1>
+
+
       <!-- GET SCORE FROM BACK END  -->
-      <h1>Score: 2/3 </h1>
+      <h1>Score: <%= score %> </h1>
     </section>
 
     <!-- HARD CODING QUESTIONS FOR LAYOUT PURPOSES-->
@@ -78,36 +80,6 @@
       </div>
 
 
-      <!-- Second Question -->
-      <div class="question">
-        <h3>Question 2: Burgdoggen pancetta sirloin flank, ham quis minim laborum eiusmod ea pork belly picanha ham hock. </h3>
-
-
-      <!-- Answer 1 -->
-      <div class="answer-options">
-        <input type="radio" class="answer-radio" name="question-2"  value="answer-1" id="answer-2-1" />
-        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-      </div>
-
-      <!-- Answer 2 -->
-      <div class="answer-options">
-        <input type="radio" class="answer-radio" name="question-2"  value="answer-2" id="answer-2-2" />
-        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-      </div>
-
-      <!-- Answer 3 -->
-      <!-- ASSUMING THIS IS THE CORRECT ANSWER-->
-      <div class="answer-options correct-answer">
-        <input type="radio" class="answer-radio" name="question-2"  value="answer-3" id="answer-2-3" checked/>
-        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-      </div>
-
-      <!-- Answer 4 -->
-      <div class="answer-options">
-        <input type="radio" class="answer-radio" name="question-2"  value="answer-4" id="answer-2-4" />
-        <p>Beef ribs cow cillum, anim buffalo eu id venison porchetta dolor irure.</p>
-      </div>
-    </div>
 
     <!-- Button to Copy the Results URL -->
     <button id="copy-results-url-btn" type="button">Copy Results URL</button>
