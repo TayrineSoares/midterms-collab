@@ -43,7 +43,7 @@ const addQuestions = function (quizId, questions) {
   const questionPromises = questions.map((question) => {
     return db.query(
       `INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING id`,
-      [quizId, question.text] // Pass quizId and question text
+      [quizId, question.text]
     );
   });
 
@@ -93,10 +93,9 @@ const getQuestionsForQuiz = (url) => {
       if (!quiz) {
         throw new Error('Quiz not found');
       }
-      const quizId = quiz.id;  // Use quiz_id from the quiz
-      // Ensure you're returning only the rows of questions
+      const quizId = quiz.id;
       return db.query('SELECT * FROM questions WHERE quiz_id = $1', [quizId])
-        .then(result => result.rows); // Return only the rows array
+        .then(result => result.rows);
     })
     .catch((err) => {
       throw err;
@@ -110,10 +109,9 @@ const getAnswersForQuiz = (url) => {
       if (!quiz) {
         throw new Error('Quiz not found');
       }
-      const quizId = quiz.id;  // Use quiz_id from the quiz
-      // Ensure you're returning only the rows of answers
+      const quizId = quiz.id;
       return db.query('SELECT * FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = $1)', [quizId])
-        .then(result => result.rows); // Return only the rows array
+        .then(result => result.rows);
     })
     .catch((err) => {
       throw err;

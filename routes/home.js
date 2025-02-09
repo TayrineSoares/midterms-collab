@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
 
   const quiz = {
     title: title,
-    privacy_setting: privacy_setting === 'private',  // Ensure privacy is set to true/false
+    privacy_setting: privacy_setting === 'private',
   };
 
   addQuiz(quiz)

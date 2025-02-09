@@ -68,7 +68,7 @@ router.post('/:url', (req, res) => {
 
       // Insert questions and answers into the database using quizId
       const questionPromises = formattedQuestions.map((question) => {
-        return addQuestions(quiz.id, [question]) // Pass quiz.id, not quiz.url
+        return addQuestions(quiz.id, [question])
           .then((result) => {
             const questionId = result[0].rows[0].id; // Get the question ID
             return addAnswers(questionId, question.answers); // Insert the answers for this question

@@ -7,7 +7,7 @@ router.get('/:url', (req, res) => {
   const quizUrl = req.params.url;
 
   // Fetch the quiz by ID
-  getQuizByUrl(quizUrl)  // Ensure you have a function like this that queries by URL
+  getQuizByUrl(quizUrl)
   .then((quiz) => {
     if (!quiz) {
       return res.status(404).send('Quiz not found');
@@ -15,8 +15,8 @@ router.get('/:url', (req, res) => {
 
     // Fetch questions and answers for this quiz
     Promise.all([
-      getQuestionsForQuiz(quizUrl),  // Modify to pass `url`
-      getAnswersForQuiz(quizUrl),    // Modify to pass `url`
+      getQuestionsForQuiz(quizUrl),
+      getAnswersForQuiz(quizUrl),
     ])
     .then(([questions, answers]) => {
       const questions_and_answers = questions.map((question) => {
@@ -29,7 +29,7 @@ router.get('/:url', (req, res) => {
 
       res.render('quiz', {
         quiz,
-        quizUrl,   // Pass `url` instead of `id`
+        quizUrl,
         questions_and_answers,
         title: quiz.title,
         privacySetting: quiz.privacy_setting,
@@ -49,49 +49,61 @@ router.get('/:url', (req, res) => {
 
 
 //POST REQUEST TO HANDLE THE FORM SUBMISSION
-router.post('/:url', (req, res) => {  // Change `id` to `url`
-  const quizUrl = req.params.url;  // Get quiz URL from the request parameter
+router.post('/:url', (req, res) => {
+  const quizUrl = req.params.url;
   const submittedAnswers = req.body;
 
-  // Fetch questions and answers for this quiz
-  Promise.all([getQuestionsForQuiz(quizUrl), getAnswersForQuiz(quizUrl)])
-  .then(([questions, answers]) => {
-    let score = 0;
+  getQuizByUrl(quizUrl)
+  .then((quiz) => {
+    if (!quiz) {
+      return res.status(404).send('Quiz not found');
+    }
 
-    questions.forEach((question, index) => {
-      const correctAnswer = answers.find(answer => answer.question_id === question.id && answer.is_correct);
-      const submittedAnswer = submittedAnswers[`question_${index}`];
+    const quizId = quiz.id;
 
-      if (submittedAnswer === correctAnswer.answer_text) {
-        score++;
-      }
-    });
+    // Fetch questions and answers for this quiz
+    Promise.all([getQuestionsForQuiz(quizUrl), getAnswersForQuiz(quizUrl)])
+    .then(([questions, answers]) => {
+      let score = 0;
 
-    console.log('Score:', score);
+      questions.forEach((question, index) => {
+        const correctAnswer = answers.find(answer => answer.question_id === question.id && answer.is_correct);
+        const submittedAnswer = submittedAnswers[`question_${index}`];
 
-    const totalQuestions = questions.length;
-
-    const attempt = {
-      quiz_url: quizUrl,  // Make sure you're storing the URL, not ID
-      score: score,
-      totalQuestions: totalQuestions
-    };
-
-    submitAttempt(attempt)
-      .then((newAttempt) => {
-        res.redirect(`/results/${newAttempt.url}`);
-      })
-      .catch((err) => {
-        console.error('Error saving attempt:', err);
-        res.status(500).send('Error saving attempt');
+        if (submittedAnswer === correctAnswer.answer_text) {
+          score++;
+        }
       });
+
+      console.log('Score:', score);
+
+      const totalQuestions = questions.length;
+
+      const attempt = {
+        quiz_id: quizId,
+        score: score,
+        totalQuestions: totalQuestions
+      };
+
+      submitAttempt(attempt)
+        .then((newAttempt) => {
+          res.redirect(`/results/${newAttempt.url}`);
+        })
+        .catch((err) => {
+          console.error('Error saving attempt:', err);
+          res.status(500).send('Error saving attempt');
+        });
+    })
+    .catch((err) => {
+      console.error('Error fetching quiz data:', err);
+      res.status(500).send('Error calculating score');
+    });
   })
   .catch((err) => {
-    console.error('Error fetching quiz data:', err);
-    res.status(500).send('Error calculating score');
+  console.error('Error fetching quiz:', err);
+  res.status(500).send('Error fetching quiz');
   });
 });
-
 
 
 module.exports = router;
