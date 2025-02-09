@@ -31,6 +31,7 @@ router.get('/:id', (req, res) => {
           // Render the quiz page with the quiz, questions, and answers
           res.render('quiz', {
             quiz,
+            quizId,   // ADDED QUIZ ID
             questions_and_answers,
             title: quiz.title,
             privacySetting: quiz.privacy_setting,
@@ -46,5 +47,48 @@ router.get('/:id', (req, res) => {
       res.status(500).send('Error fetching quiz');
     });
 });
+
+
+
+//POST REQUEST TO HANDLE THE FORM SUBMISSION
+router.post('/:id', (req, res) => {
+  const quizId = req.params.id
+  const submittedAnswers = req.body; // answers submitted by the user
+  // console.log(req.body)
+
+    // Fetch correct answers for the quiz
+    Promise.all([getQuestionsForQuiz(quizId), getAnswersForQuiz(quizId)])
+    .then(([questions, answers]) => {
+      let score = 0;
+
+      // Loop through each question and compare the answers
+      questions.forEach((question, index) => {
+        const correctAnswer = answers.find(answer => answer.question_id === question.id && answer.is_correct);
+
+        // Get the user's selected answer (assuming submitted answers are keyed by question number)
+        const submittedAnswer = submittedAnswers[`question_${index}`];
+
+        // Check if the submitted answer matches the correct answer
+        if (submittedAnswer === correctAnswer.answer_text) {
+          score++;
+        }
+      });
+
+      //MAKE SURE IS CALCULATING THE SCORE
+      console.log('Score:', score);
+
+      // Redirect to a results page with the score
+      res.redirect(`/results/${quizId}`);
+    })
+    .catch((err) => {
+      console.error('Error fetching quiz data:', err);
+      res.status(500).send('Error calculating score');
+    });
+});
+
+
+
+
+
 
 module.exports = router;
