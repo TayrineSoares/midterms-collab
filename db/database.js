@@ -166,23 +166,23 @@ const getAttemptById = function (attemptId) {
     });
 };
 
-// Retrieves all answers to a quiz attempt
-const getAttemptAnswers = function (attemptId) {
+// Retrieve Quiz score
+const getAttemptDetails = function (attemptId) {
   return db
     .query(
-      `SELECT COUNT(*) AS correct_answers
-       FROM attempt_answers
-       WHERE attempt_id = $1 AND is_correct = true`,
+      `SELECT attempts.*, quizzes.title AS quiz_title
+       FROM attempts
+       JOIN quizzes ON attempts.quiz_id = quizzes.id
+       WHERE attempts.id = $1`,
       [attemptId]
     )
     .then((result) => {
-      return result.rows[0].correct_answers; // Return the count of correct answers
+      return result.rows[0]; // Returns attempt details with quiz title
     })
     .catch((err) => {
       throw err;
     });
 };
-
 
 
 module.exports = {
@@ -196,5 +196,5 @@ module.exports = {
   submitAttempt,
   submitAnswer,
   getAttemptById,
-  getAttemptAnswers,
+  getAttemptDetails
 };
