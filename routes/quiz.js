@@ -50,7 +50,7 @@ router.get('/:id', (req, res) => {
 
 
 
-// Route to display the quiz attemp form submission
+//POST REQUEST TO HANDLE THE FORM SUBMISSION
 router.post('/:id', (req, res) => {
   const quizId = req.params.id
   const submittedAnswers = req.body; // answers submitted by the user
@@ -74,6 +74,7 @@ router.post('/:id', (req, res) => {
         }
       });
 
+      //MAKE SURE IS CALCULATING THE SCORE
       console.log('Score:', score);
 
       // Redirect to a results page with the score
