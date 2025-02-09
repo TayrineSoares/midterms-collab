@@ -3,8 +3,11 @@ const router = express.Router();
 
 
 // GET route to show the results page
-router.get('/', (req, res) => {
-  res.render('results'); // Render the results page (replace with your actual results page)
+router.get('/:id', (req, res) => {
+
+  
+  res.render('results', { score }); // Render the results page (replace with your actual results page)
+
 });
 
 // POST route for submitting the results
