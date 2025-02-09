@@ -27,9 +27,9 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const createRoutes = require('./routes/create'); 
 const resultsRoutes = require('./routes/results');
-const publicRoutes = require('./routes/public');
 const homeRoutes = require('./routes/home');
 const quizRoutes = require('./routes/quiz');
+const publicRoutes = require('./routes/public');
 // const viewQuizRoutes = require('./routes/viewQuiz')
 
 
@@ -41,9 +41,9 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/quiz/create', createRoutes);
 app.use('/results', resultsRoutes); 
-app.use('/public', publicRoutes); 
 app.use('/', homeRoutes);
 app.use('/quiz', quizRoutes);
+app.use('/public', publicRoutes);
 // app.use('/viewQuiz', viewQuizRoutes);
 // Note: mount other resources here, using the same pattern above
 

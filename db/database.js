@@ -184,6 +184,20 @@ const getAttemptDetails = function (attemptId) {
     });
 };
 
+// Retrive Public Quizzes
+const getPublicQuizzes = function () {
+  return db
+    .query(`
+      SELECT title, url
+      FROM quizzes
+      WHERE privacy_setting = false; -- Public quizzes
+    `)
+    .then((result) => result.rows)
+    .catch((err) => {
+      console.error('Error fetching public quizzes:', err.message);
+      throw err;
+    });
+};
 
 module.exports = {
   db,
@@ -196,5 +210,6 @@ module.exports = {
   submitAttempt,
   submitAnswer,
   getAttemptById,
-  getAttemptDetails
+  getAttemptDetails,
+  getPublicQuizzes
 };
