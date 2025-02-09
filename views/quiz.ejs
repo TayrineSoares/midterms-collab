@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!--If the title is "Math Quiz", the browser tab will display Creating Quiz: Math Quiz.-->
   <title>Quiz: <%= title %></title>
+
+  <!-- Given code -->
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+   <!-- Given code -->
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+
+
+  <!-- Link CSS Files -->
   <link rel="stylesheet" href="/styles/layout.css" />
   <link rel="stylesheet" href="/styles/navbar_footer.css" />
-  <link rel="stylesheet" href="/styles/quiz.css" />
   <link rel="stylesheet" href="/styles/create.css" />
+  <link rel="stylesheet" href="/styles/quiz.css" />
+  <!-- JQUERY -->
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/app.js"></script>
 </head>
+
+<!-- Google Fonts ('Nunito', sans-serif;)-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
 <body>
   <%- include('partials/_header.ejs') %>
 
@@ -20,14 +42,11 @@
     <div class="all-questions"></div>
       <% questions_and_answers.forEach((qa, index) => { %>
         <div class="question">
-          <h2>Question <%= index + 1 %>: <%= qa.question %></h2>
+          <h2><%= qa.question %></h2>
           <ul>
             <% qa.answers.forEach((answer) => { %>
               <li>
                 <%= answer.answer_text %>
-                <% if (answer.is_correct) { %>
-                  <span class="correct-answer">(Correct)</span>
-                <% } %>
               </li>
             <% }) %>
           </ul>
