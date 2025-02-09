@@ -38,30 +38,36 @@
     <p>Privacy: <%= privacySetting ? 'Private' : 'Public' %></p>
     </section>
 
-    <!-- Display Questions and Answers -->
-    <div class="all-questions"></div>
-      <% questions_and_answers.forEach((qa, index) => { %>
-        <div class="question">
-          <h2><%= qa.question %></h2>
-          <ul>
+    <!-- Display Questions and Answers WRAPPED IN A FORM-->
+    <!--CONFIRM WITH DRO WHAT THE ACTION WILL BE HERE-->
+    <form action="/quiz/results/<%= quizId %>" method="POST">
+      <div class="all-questions"></div>
+
+
+        <% questions_and_answers.forEach((qa, index) => { %>
+          <div class="question">
+            <h2><%= qa.question %></h2>
+
             <% qa.answers.forEach((answer) => { %>
-              <li>
-                <%= answer.answer_text %>
-              </li>
-            <% }) %>
-          </ul>
-        </div>
-      <% }) %>
-    </div>
+            <!--When you wrap text inside a <label>, clicking the text will also select the corresponding radio button.-->
+            <label>
+              <input type="radio" name="question_<%= index %>" value="<%= answer.answer_text %>">
+              <%= answer.answer_text %>
+            </label>
+              <% }) %>
+          </div>
+        <% }) %>
+      </div>
 
 
-  </div>
+      <!-- Button to Submit Quiz -->
+      <button id="submit-quiz-btn" type="submit" >Finish</button>
+    </form>
 
-<!-- Button to Submit Quiz -->
-<button id="submit-quiz-btn" type="submit" >Finish</button>
-</form>
+
 <!-- Button to Copy the Quiz URL -->
 <button id="copy-quiz-url-btn" type="button">Copy Quiz URL</button>
+</div>
 
   <%- include('partials/_footer.ejs') %>
 </body>
