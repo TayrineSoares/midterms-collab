@@ -40,9 +40,10 @@
 
     <!-- Display Questions and Answers WRAPPED IN A FORM-->
     <!--CONFIRM WITH DRO WHAT THE ACTION WILL BE HERE-->
-    <form action="/quiz/results/<%= quizId %>" method="POST">
+    <form action="/quiz/<%= quizId %>" method="POST">
       <div class="all-questions"></div>
 
+        <!--questions_and_answers is an object with organized questions along with answers-->
 
         <% questions_and_answers.forEach((qa, index) => { %>
           <div class="question">
@@ -51,7 +52,7 @@
             <% qa.answers.forEach((answer) => { %>
             <!--When you wrap text inside a <label>, clicking the text will also select the corresponding radio button.-->
             <label>
-              <input type="radio" name="question_<%= index %>" value="<%= answer.answer_text %>">
+              <input type="radio" name="question_<%= index %>" value="<%= answer.answer_text %>" required>
               <%= answer.answer_text %>
             </label>
               <% }) %>

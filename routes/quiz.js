@@ -31,6 +31,7 @@ router.get('/:id', (req, res) => {
           // Render the quiz page with the quiz, questions, and answers
           res.render('quiz', {
             quiz,
+            quizId,   // ADDED QUIZ ID
             questions_and_answers,
             title: quiz.title,
             privacySetting: quiz.privacy_setting,
