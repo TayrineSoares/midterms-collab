@@ -25,55 +25,43 @@ db.query('SELECT NOW()')
 
 // Adds new quiz to database
 const addQuiz = function (quiz) {
-  // Generate a unique URL for the quiz
   const url = `http://localhost:8080/quiz/${Math.random().toString(36).substring(7)}`;
 
   return db
     .query(`INSERT INTO quizzes (title, privacy_setting, url)
             VALUES ($1, $2, $3) RETURNING *`,
-           [quiz.title, quiz.privacy_setting, url])  // Always 5 questions
+      [quiz.title, quiz.privacy_setting, url])
     .then((result) => {
+      console.log('Quiz created:', result.rows[0]);  // Log the result
       return result.rows[0];
     })
     .catch((err) => {
-      throw err;
-    });
-}
-
-const addQuestions = function (quizId, questions) {
-  // Map each question text to a database query promise for insertion
-  const questionPromises = questions.map((questionText) => {
-    return db
-      .query(`INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING *`, [quizId, questionText]);
-  });
-
-  // Execute all question insertion queries concurrently and handle results or errors
-  return Promise.all(questionPromises)
-    .then((results) => {
-      return results;
-    })
-    .catch((err) => {
+      console.error('Error inserting quiz:', err.message);
       throw err;
     });
 };
 
-const addAnswers = function (quizId, answers) {
-  const answerPromises = answers.map((answer) => {
-    const { questionId, answer_text, is_correct } = answer;
+const addQuestions = function (quizId, questions) {
+  const questionPromises = questions.map((question) => {
     return db.query(
-      `INSERT INTO answers (question_id, answer_text, is_correct)
-       VALUES ($1, $2, $3) RETURNING *`,
+      `INSERT INTO questions (quiz_id, question) VALUES ($1, $2) RETURNING id`,
+      [quizId, question.text] // Pass quizId and question text
+    );
+  });
+
+  return Promise.all(questionPromises);
+};
+
+const addAnswers = function (questionId, answers) {
+  const answerPromises = answers.map((answer) => {
+    const { answer_text, is_correct } = answer;
+    return db.query(
+      `INSERT INTO answers (question_id, answer_text, is_correct) VALUES ($1, $2, $3)`,
       [questionId, answer_text, is_correct]
     );
   });
 
-  return Promise.all(answerPromises)
-    .then((results) => {
-      return results;
-    })
-    .catch((err) => {
-      throw err;
-    });
+  return Promise.all(answerPromises);
 };
 
 // Quiz Access
@@ -103,7 +91,7 @@ const getQuestionsForQuiz = function (quizId) {
 
 const getAnswersForQuiz = function (quizId) {
   return db
-    .query(`SELECT * FROM answers WHERE question_id = $1`, [quizId])
+    .query(`SELECT * FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = $1)`, [quizId])
     .then((result) => {
       return result.rows;
     })

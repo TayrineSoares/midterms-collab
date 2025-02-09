@@ -27,43 +27,57 @@ router.get('/:id', (req, res) => {
 // Route to handle the submission of questions and answers for a given quiz
 router.post('/:quizId', (req, res) => {
   const { quizId } = req.params;
-  const { questions, answers } = req.body; // Get both questions and answers from the form
+  const { questions, answers } = req.body;
 
-  // Check if questions are submitted, if not, add them
-  if (questions && Array.isArray(questions) && questions.length === 5) {
-    // Add questions to the database
-    addQuestions(quizId, questions)
-      .then(() => {
-        console.log(`Questions added to quiz ${quizId}:`, questions);
-      })
-      .catch((err) => {
-        console.error('Error adding questions:', err.message);
-        return res.status(500).send({ error: 'Error adding questions', details: err.message });
-      });
-  } else {
-    return res.status(400).send({ error: 'Exactly 5 questions are required' });
+  console.log('Request Body:', req.body);
+
+  // Ensure questions and answers are valid
+  if (!Array.isArray(questions) || !Array.isArray(answers) || questions.length !== answers.length) {
+    return res.status(400).send({ error: 'Questions and answers must be arrays of the same length' });
   }
 
-  // Check if answers are submitted
-  if (answers && Array.isArray(answers) && answers.length === 20) { // 4 answers for each of 5 questions
-    const formattedAnswers = answers.map((answer) => ({
-      question_id: answer.question_id,
-      answer_text: answer.answer_text,
-      is_correct: answer.is_correct,  // Ensure we are including the is_correct field
-    }));
+  // Format questions and answers for insertion
+  const formattedQuestions = questions.map((question, index) => ({
+    text: question,
+    answers: [
+      {
+        answer_text: answers[index].answer1,
+        is_correct: answers[index].correct === 'answer1'
+      },
+      {
+        answer_text: answers[index].answer2,
+        is_correct: answers[index].correct === 'answer2'
+      },
+      {
+        answer_text: answers[index].answer3,
+        is_correct: answers[index].correct === 'answer3'
+      },
+      {
+        answer_text: answers[index].answer4,
+        is_correct: answers[index].correct === 'answer4'
+      }
+    ]
+  }));
 
-    addAnswers(quizId, formattedAnswers)
-      .then(() => {
-        console.log(`Answers added to quiz ${quizId}:`, formattedAnswers);
-        res.redirect(`/quiz/${quizId}`);
-      })
-      .catch((err) => {
-        console.error('Error adding answers:', err.message);
-        return res.status(500).send({ error: 'Error adding answers', details: err.message });
+  // Insert questions and answers into the database
+  const questionPromises = formattedQuestions.map((question) => {
+    return addQuestions(quizId, [question]) // Pass the question object
+      .then((result) => {
+        const questionId = result[0].rows[0].id; // Get the question ID
+        return addAnswers(questionId, question.answers); // Insert the answers for this question
       });
-  } else {
-    return res.status(400).send({ error: 'Exactly 20 answers are required (4 answers for each of 5 questions)' });
-  }
+  });
+
+  // Wait for all questions and answers to be inserted
+  Promise.all(questionPromises)
+    .then(() => {
+      console.log(`Questions and answers added to quiz ${quizId}`);
+      res.redirect(`/quiz/${quizId}`); // Redirect to the quiz page
+    })
+    .catch((err) => {
+      console.error('Error adding questions and answers:', err.message);
+      res.status(500).send({ error: 'Error adding questions and answers', details: err.message });
+    });
 });
 
 module.exports = router;
