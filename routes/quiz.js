@@ -4,29 +4,9 @@ const { getQuizById, getQuestionsForQuiz, getAnswersForQuiz } = require('../db/d
 
 <<<<<<< Updated upstream
 // Route to display the quiz details page
-router.get('/:quizId', (req, res) => {
-  const { quizId } = req.params;
-=======
-router.post('/', (req, res) => {
-
-  res.redirect('/quiz');
-});
-
-
-router.get('/', (req, res) => {
-
-  res.render('quiz');
-});
-
 router.get('/:id', (req, res) => {
->>>>>>> Stashed changes
+  const quizId = req.params.id;
 
-})
-
-
-// Route to display the quiz details page
-router.get('/:quizId', (req, res) => {
-  const { quizId } = req.params;
   // Fetch the quiz by ID
   getQuizById(quizId)
     .then((quiz) => {
@@ -39,10 +19,20 @@ router.get('/:quizId', (req, res) => {
         getAnswersForQuiz(quizId),
       ])
         .then(([questions, answers]) => {
+          // Organize questions with their answers
+          const questions_and_answers = questions.map((question) => {
+            const related_answers = answers.filter(answer => answer.question_id === question.id);
+            return {
+              question: question.question, // Use the correct field name
+              answers: related_answers
+            };
+          });
+
+          // Render the quiz page with the quiz, questions, and answers
           res.render('quiz', {
             quiz,
-            questions,
-            answers,
+            quizId,   // ADDED QUIZ ID
+            questions_and_answers,
             title: quiz.title,
             privacySetting: quiz.privacy_setting,
           });
@@ -57,6 +47,48 @@ router.get('/:quizId', (req, res) => {
       res.status(500).send('Error fetching quiz');
     });
 });
+
+
+
+//POST REQUEST TO HANDLE THE FORM SUBMISSION
+router.post('/:id', (req, res) => {
+  const quizId = req.params.id
+  const submittedAnswers = req.body; // answers submitted by the user
+  // console.log(req.body)
+
+    // Fetch correct answers for the quiz
+    Promise.all([getQuestionsForQuiz(quizId), getAnswersForQuiz(quizId)])
+    .then(([questions, answers]) => {
+      let score = 0;
+
+      // Loop through each question and compare the answers
+      questions.forEach((question, index) => {
+        const correctAnswer = answers.find(answer => answer.question_id === question.id && answer.is_correct);
+
+        // Get the user's selected answer (assuming submitted answers are keyed by question number)
+        const submittedAnswer = submittedAnswers[`question_${index}`];
+
+        // Check if the submitted answer matches the correct answer
+        if (submittedAnswer === correctAnswer.answer_text) {
+          score++;
+        }
+      });
+
+      //MAKE SURE IS CALCULATING THE SCORE
+      console.log('Score:', score);
+
+      // Redirect to a results page with the score
+      res.redirect(`/results/${quizId}`);
+    })
+    .catch((err) => {
+      console.error('Error fetching quiz data:', err);
+      res.status(500).send('Error calculating score');
+    });
+});
+
+
+
+
 
 
 module.exports = router;

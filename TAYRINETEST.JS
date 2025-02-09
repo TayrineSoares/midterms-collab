@@ -31,3 +31,37 @@
     },
   ]
 }
+
+
+
+
+// object from quiz attemp form 
+{
+  question_0: 'Q1A',
+  question_1: 'Q3C',
+  question_2: 'Q2B',
+  question_3: 'Q5C',
+  question_4: 'Q4C'
+}
+
+
+
+
+// <!-- Display Questions and Answers -->
+// <div class="all-questions"></div>
+//   <% questions_and_answers.forEach((qa, index) => { %>
+//     <div class="question">
+//       <h2>Question <%= index + 1 %>: <%= qa.question %></h2>
+//       <ul>
+//         <% qa.answers.forEach((answer) => { %>
+//           <li>
+//             <%= answer.answer_text %>
+//             <% if (answer.is_correct) { %>
+//               <span class="correct-answer">(Correct)</span>
+//             <% } %>
+//           </li>
+//         <% }) %>
+//       </ul>
+//     </div>
+//   <% }) %>
+// </div>
