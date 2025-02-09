@@ -57,7 +57,7 @@
     <!--THE ACTION FOR THE POST METHOD IS ON create/:quizId -->
     <!-- THE REDIRECT (TO BE HANDLED IN THE ROUTE) IS TO quiz/:quizId-->
 
-    <form class="questions-form" action="/quiz/create/<%= quizId %>" method="POST">
+    <form class="questions-form" action="/quiz/create/<%= url %>" method="POST">
       <% for (let i = 0; i < 5; i++) { %>
         <h2>Question <%= i + 1 %></h2>
         <textarea name="questions[<%= i %>]" id="question<%= i + 1 %>" required placeholder="Enter Question <%= i + 1 %>"></textarea>
