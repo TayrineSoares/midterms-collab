@@ -25,18 +25,16 @@ db.query('SELECT NOW()')
 
 // Adds new quiz to database
 const addQuiz = function (quiz) {
-  const url = `http://localhost:8080/quiz/${Math.random().toString(36).substring(7)}`;
+  const url = `${Math.random().toString(36).substring(7)}`;
 
   return db
     .query(`INSERT INTO quizzes (title, privacy_setting, url)
             VALUES ($1, $2, $3) RETURNING *`,
       [quiz.title, quiz.privacy_setting, url])
     .then((result) => {
-      console.log('Quiz created:', result.rows[0]);  // Log the result
       return result.rows[0];
     })
     .catch((err) => {
-      console.error('Error inserting quiz:', err.message);
       throw err;
     });
 };
@@ -77,23 +75,45 @@ const getQuizById = function (quizId) {
     })
 };
 
-const getQuestionsForQuiz = function (quizId) {
+const getQuizByUrl = (url) => {
   return db
-    .query(`SELECT * FROM questions WHERE quiz_id = $1`, [quizId])
+    .query('SELECT * FROM quizzes WHERE url = $1', [url])
     .then((result) => {
-      return result.rows;
+      return result.rows[0];
+    })  
+    .catch((err) => {
+      throw err;
+    });
+};
+
+const getQuestionsForQuiz = (url) => {
+  // First, retrieve the quiz_id by url
+  return getQuizByUrl(url)
+    .then((quiz) => {
+      if (!quiz) {
+        throw new Error('Quiz not found');
+      }
+      const quizId = quiz.id;  // Use quiz_id from the quiz
+      // Ensure you're returning only the rows of questions
+      return db.query('SELECT * FROM questions WHERE quiz_id = $1', [quizId])
+        .then(result => result.rows); // Return only the rows array
     })
     .catch((err) => {
       throw err;
     });
-
 };
 
-const getAnswersForQuiz = function (quizId) {
-  return db
-    .query(`SELECT * FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = $1)`, [quizId])
-    .then((result) => {
-      return result.rows;
+const getAnswersForQuiz = (url) => {
+  // First, retrieve the quiz_id by url
+  return getQuizByUrl(url)
+    .then((quiz) => {
+      if (!quiz) {
+        throw new Error('Quiz not found');
+      }
+      const quizId = quiz.id;  // Use quiz_id from the quiz
+      // Ensure you're returning only the rows of answers
+      return db.query('SELECT * FROM answers WHERE question_id IN (SELECT id FROM questions WHERE quiz_id = $1)', [quizId])
+        .then(result => result.rows); // Return only the rows array
     })
     .catch((err) => {
       throw err;
@@ -104,7 +124,7 @@ const getAnswersForQuiz = function (quizId) {
 
 // Records attempt from taking quiz
 const submitAttempt = function (attempt) {
-  const url = `http://localhost:8080/results/${Math.random().toString(36).substring(7)}`;
+  const url = `${Math.random().toString(36).substring(7)}`;
 
   return db
     .query(
@@ -192,9 +212,10 @@ const getPublicQuizzes = function () {
       FROM quizzes
       WHERE privacy_setting = false; -- Public quizzes
     `)
-    .then((result) => result.rows)
+    .then((result) => {
+      return result.rows;
+    })
     .catch((err) => {
-      console.error('Error fetching public quizzes:', err.message);
       throw err;
     });
 };
@@ -205,6 +226,7 @@ module.exports = {
   addQuestions,
   addAnswers,
   getQuizById,
+  getQuizByUrl,
   getQuestionsForQuiz,
   getAnswersForQuiz,
   submitAttempt,

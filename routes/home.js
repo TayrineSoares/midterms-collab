@@ -19,7 +19,7 @@ router.post('/', (req, res) => {
       console.log('Quiz created:', createdQuiz);
       
       // Redirect to the create-questions page for this quiz
-      res.redirect(`/quiz/create/${createdQuiz.id}`);
+      res.redirect(`/quiz/create/${createdQuiz.url}`);
     })
     .catch((err) => {
       console.error("Error creating quiz:", err);
