@@ -13,13 +13,13 @@
 
 .all-public-quizzes {
   width: 60%;
+  min-width: 320px; /* Ensures it doesn't get too small */
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-
+  justify-content: center; /* Centers items horizontally */
+  gap: 20px; /* Space between cards */
+  margin: 0 auto; /* Keeps it centered */
 }
-
-
 
 .quiz-card {
   background: white;
@@ -27,8 +27,9 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  margin: 25px;
-  width: 30%;
+  width: 280px; /* Ensures consistency */
+  min-width: 250px; /* Prevents shrinking too much */
+  margin: 10px auto; /* Keeps single items centered */
 }
 
 
@@ -49,4 +50,9 @@
 
 .quiz-btn:active {
   transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
+
+#public-homepage-btn {
+  width: 50%;
+  margin-top: 50px;
 }
