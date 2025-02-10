@@ -7,6 +7,7 @@ router.get("/", (req, res) => {
   getPublicQuizzes()
     .then((quizzes) => {
       const templateVars = { quizzes }; // Pass quizzes data as a variable
+      console.log(templateVars);
       res.render("public", templateVars); // Render the EJS template with the data
     })
     .catch((err) => {

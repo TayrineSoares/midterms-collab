@@ -37,24 +37,26 @@
 
 
   <!-- Main content -->
-  <div class="all-public-quizzes">
-    <h1 style="text-align: center;">All Quizzes</h1>
+  <div class ="main">
+    <h1><strong>All Public Quizzes</strong></h1>
+    <div class="all-public-quizzes">
 
-    <!-- Quiz 1 -->
-    <div class="quiz-card">
-      <h2>Quiz 1</h2>
-      <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
-      <a href="/quiz/1" class="quiz-btn">Take Quiz</a>
+      <!-- Create a card for each quiz in the db-->
+      <% quizzes.forEach(quiz => { %>
+        <div class="quiz-card">
+
+          <h2><%= quiz.title %></h2>
+          <a href="quiz/<%= quiz.url %>" class="quiz-btn">Take Quiz</a>
+
+        </div>
+
+      <% }) %>
+
+
     </div>
-
-    
-    <!-- Quiz 2 -->
-    <div class="quiz-card">
-      <h2>Quiz 2</h2>
-      <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
-      <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
-    </div>
-
+    <!-- Button to go back to the homepage -->
+    <button id="homepage-btn" type="button">Back to Homepage</button>
+  </div>
 
   <!-- Footer (fixed) -->
   <%- include('partials/_footer.ejs') %>
