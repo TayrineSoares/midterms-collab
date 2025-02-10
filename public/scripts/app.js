@@ -16,16 +16,21 @@
 
 
 $(document).ready(function() {
-  // Button click event
+
+  // Button click events - Redirect
   $('#all-public-quizzes-btn'). on('click', () => {
     window.location.href = '/public'; // Redirect to /public
-    console.log("Button clicked!");
+  });
+
+  $('#homepage-btn'). on('click', () => {
+    window.location.href = '/'; // Redirect to /
 
   });
 
 
-  //Copy current URL
-  $("#copy-quiz-url-btn"). on('click', () => {
+
+  //Button click event - Copy current URL
+  $("#copy-url-btn"). on('click', () => {
     navigator.clipboard.writeText(window.location.href)
     .then(() =>{
       //Popup message

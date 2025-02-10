@@ -25,16 +25,16 @@
   margin-right: 20px;
 }
 
-#copy-quiz-url-btn {
+#copy-url-btn {
   background-color: var(--tertiary-bg-color);
   margin-top: 30px;
 }
 
-#copy-quiz-url-btn:hover {
+#copy-url-btn:hover {
   background: #0056b3;
 }
 
-#copy-quiz-url-btn:active {
+#copy-url-btn:active {
   transform: scale(0.95); /* Slightly shrink the button when clicked */
 }
 
@@ -53,7 +53,7 @@
 
 
 
-#copy-quiz-url-btn,
+#copy-url-btn,
 #finish-quiz-btn {
   width: 20%;
 }
