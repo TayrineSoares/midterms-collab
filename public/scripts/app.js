@@ -27,6 +27,13 @@ $(document).ready(function() {
 
   });
 
+  $('#public-homepage-btn'). on('click', () => {
+    window.location.href = '/'; // Redirect to /
+
+  });
+
+
+
 
 
   //Button click event - Copy current URL
