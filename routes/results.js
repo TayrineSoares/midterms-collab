@@ -1,25 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const {getAttemptByUrl } = require('../db/database');
+const { getAttemptByUrl } = require('../db/database');
 
+router.get('/:url', (req, res) => {
+  const attemptUrL = req.params.url; 
 
-router.get('/', (req, res) => {
-  res.render('results'); 
-
-
-});
-router.get('/:attemptUrl', (req, res) => {
-  const attemptUrL = req.params.attemptUrl; 
-
-  getAttemptByUrl(attemptUrl)
+  getAttemptByUrl(attemptUrL)
     .then((attempt) => {
       if (!attempt) {
         return res.status(404).send('No attempts found');
       }
 
       res.render('results', {
-        title: attempt.quiz_title,
+        quizTitle: attempt.quiz_title,
         score: attempt.score,
+        totalQuestions: attempt.total_questions,
       });
     })
     .catch((err) => {

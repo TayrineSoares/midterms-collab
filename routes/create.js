@@ -70,8 +70,8 @@ router.post('/:url', (req, res) => {
       const questionPromises = formattedQuestions.map((question) => {
         return addQuestions(quiz.id, [question])
           .then((result) => {
-            const questionId = result[0].rows[0].id; // Get the question ID
-            return addAnswers(questionId, question.answers); // Insert the answers for this question
+            const questionId = result[0].rows[0].id;
+            return addAnswers(questionId, question.answers);
           });
       });
 
@@ -80,7 +80,7 @@ router.post('/:url', (req, res) => {
     })
     .then(() => {
       console.log(`Questions and answers added to quiz with URL ${quizUrl}`);
-      res.redirect(`/quiz/${quizUrl}`); // Redirect to the quiz page using URL
+      res.redirect(`/quiz/${quizUrl}`);
     })
     .catch((err) => {
       console.error('Error adding questions and answers:', err.message);

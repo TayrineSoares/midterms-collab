@@ -1,8 +1,8 @@
 -- Insert quizzes
 INSERT INTO quizzes (title, privacy_setting, url)
 VALUES
-  ('Math Quiz', TRUE, 'https://example.com/quiz/1'),
-  ('Science Quiz', FALSE, 'https://example.com/quiz/2');
+  ('Math Quiz', TRUE, '9wh5k1'),
+  ('Science Quiz', FALSE, '101ur7');
 
 -- Insert questions for quizzes
 INSERT INTO questions (quiz_id, question)
@@ -39,15 +39,5 @@ VALUES
 -- Insert attempts
 INSERT INTO attempts (quiz_id, score, total_questions, url)
 VALUES
-  (1, 2, 2, 'https://example.com/attempt/1'), -- Attempt on Quiz 1 (2 correct out of 2)
-  (2, 1, 2, 'https://example.com/attempt/2'); -- Attempt on Quiz 2 (1 correct out of 2)
-
--- Insert attempt_answers
-INSERT INTO attempt_answers (attempt_id, question_id, selected_answer_id, is_correct)
-VALUES
-  -- Attempt 1 (Quiz 1)
-  (1, 1, 1, TRUE), -- Selected correct answer for Question 1
-  (1, 2, 5, TRUE), -- Selected correct answer for Question 2
-  -- Attempt 2 (Quiz 2)
-  (2, 3, 9, TRUE), -- Selected correct answer for Question 3
-  (2, 4, 13, FALSE); -- Selected incorrect answer for Question 4
+  (1, 2, 2, '19de72'), -- Attempt on Quiz 1 (2 correct out of 2)
+  (2, 1, 2, 'dd82je'); -- Attempt on Quiz 2 (1 correct out of 2)

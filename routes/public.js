@@ -8,9 +8,9 @@ const { getQuizById } = require('../db/database');
 router.get("/", (req, res) => {
   getPublicQuizzes()
     .then((quizzes) => {
-      const templateVars = { quizzes }; // Pass quizzes data as a variable
+      const templateVars = { quizzes };
       console.log(templateVars);
-      res.render("public", templateVars); // Render the EJS template with the data
+      res.render("public", templateVars);
 
 })});
 
