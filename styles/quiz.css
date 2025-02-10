@@ -28,6 +28,7 @@ label {
   display: flex;
   align-items: center; /* Ensures the radio button and text align vertically */
   margin-bottom: 20px; /* Optional: Add space between radio button groups */
+  margin-left: 30px;
 }
 
 label input {
