@@ -33,32 +33,27 @@
   <%- include('partials/_header.ejs') %>
 
   <div class="unique-quiz-main">
-    <section class="unique-quiz-title">
     <h1><%= title %></h1>
     <p>Privacy: <%= privacySetting ? 'Private' : 'Public' %></p>
-    </section>
 
     <!-- Display Questions and Answers WRAPPED IN A FORM-->
     <!-- Redirect to results/quizId to be handled in the POST request-->
+
+    <div class="quiz-form">
     <form action="/quiz/<%= quizUrl %>" method="POST">
-      <div class="all-questions"></div>
-
         <!--questions_and_answers is an object with organized questions along with answers-->
-
         <% questions_and_answers.forEach((qa, index) => { %>
-          <div class="question">
-            <h2><%= qa.question %></h2>
-
+          <h2><%= qa.question %></h2>
             <% qa.answers.forEach((answer) => { %>
             <!--When you wrap text inside a <label>, clicking the text will also select the corresponding radio button.-->
-            <label>
+              <label>
               <input type="radio" name="question_<%= index %>" value="<%= answer.answer_text %>" required>
-              <%= answer.answer_text %>
-            </label>
-              <% }) %>
-          </div>
+              <p><%= answer.answer_text %></p>
+              </label>
+            <% }) %>
         <% }) %>
-      </div>
+    </div>
+
 
 
       <!-- Button to Submit Quiz -->

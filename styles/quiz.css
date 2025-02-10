@@ -1,29 +1,45 @@
 
-.question {
+.unique-quiz-main p {
+  margin: 0;
+}
+.unique-quiz-main h1 {
+  margin-bottom: 0;
+  margin-top: 50px;
+}
+
+
+
+.quiz-form {
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  margin-top: 40px;
 
 }
 
-.all-questions {
+.quiz-form h2 {
+margin-top: 50px;
+
+}
+
+
+label {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 50vw;
+  align-items: center; /* Ensures the radio button and text align vertically */
+  margin-bottom: 20px; /* Optional: Add space between radio button groups */
+}
+
+label input {
+  margin-right: 10px; /* Add some space between the radio button and the text */
+}
+
+label p {
+  margin: 5px;
+  font-size: 20px;
 }
 
 
-.answer-options {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.answer-options input {
-  margin-right: 20px;
-}
 
 #copy-url-btn {
   background-color: var(--tertiary-bg-color);
