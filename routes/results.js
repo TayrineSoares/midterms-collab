@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {getAttemptDetails } = require('../db/database');
+const {getAttemptByUrl } = require('../db/database');
 
 
 router.get('/', (req, res) => {
@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
 
 
 });
-router.get('/:attemptId', (req, res) => {
-  const attemptId = req.params.attemptId; 
+router.get('/:attemptUrl', (req, res) => {
+  const attemptUrL = req.params.attemptUrl; 
 
-  getAttemptDetails(attemptId)
+  getAttemptByUrl(attemptUrl)
     .then((attempt) => {
       if (!attempt) {
         return res.status(404).send('No attempts found');
@@ -19,11 +19,7 @@ router.get('/:attemptId', (req, res) => {
 
       res.render('results', {
         title: attempt.quiz_title,
-<<<<<<< Updated upstream
-        correctAnswersCount: attempt.score
-=======
         score: attempt.score,
->>>>>>> Stashed changes
       });
     })
     .catch((err) => {
@@ -34,8 +30,4 @@ router.get('/:attemptId', (req, res) => {
 
 
 
-<<<<<<< Updated upstream
 module.exports = router;
-=======
-module.exports = router;
->>>>>>> Stashed changes

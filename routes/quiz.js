@@ -90,8 +90,7 @@ router.post('/:id', (req, res) => {
           res.redirect(`/results/${newAttempt.id}`); 
         })
         .catch((err) => {
-          console.error('Error sav
-            .ing attempt:', err);
+          console.error('Error saving attempt:', err);
           res.status(500).send('Error saving attempt');
         });
     })

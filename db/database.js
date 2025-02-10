@@ -184,6 +184,23 @@ const getAttemptDetails = function (attemptId) {
     });
 };
 
+const getAttemptByUrl = function (url) {
+  return db
+    .query(
+      `SELECT attempts.*, quizzes.title AS quiz_title 
+       FROM attempts
+       JOIN quizzes ON attempts.quiz_id = quizzes.id
+       WHERE attempts.url = $1`, // Wrapped in backticks and fixed closing
+      [url] // Passed as second argument
+    )
+    .then((result) => {
+      return result.rows[0]; // Returns first row
+    })
+    .catch((err) => {
+      throw err; // Propagates error
+    });
+};
+
 
 module.exports = {
   db,
@@ -196,5 +213,6 @@ module.exports = {
   submitAttempt,
   submitAnswer,
   getAttemptById,
-  getAttemptDetails
+  getAttemptDetails,
+  getAttemptByUrl
 };
