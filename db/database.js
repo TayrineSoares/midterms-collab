@@ -202,6 +202,23 @@ const getAttemptDetails = function (attemptId) {
     });
 };
 
+// Retrive Public Quizzes
+const getPublicQuizzes = function () {
+  return db
+    .query(`
+      SELECT title, url
+      FROM quizzes
+      WHERE privacy_setting = false; -- Public quizzes
+    `)
+    .then((result) => {
+      return result.rows;
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
+
 const getAttemptByUrl = function (url) {
   return db
     .query(
