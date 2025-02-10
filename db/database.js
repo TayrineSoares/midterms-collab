@@ -80,7 +80,7 @@ const getQuizByUrl = (url) => {
     .query('SELECT * FROM quizzes WHERE url = $1', [url])
     .then((result) => {
       return result.rows[0];
-    })  
+    })
     .catch((err) => {
       throw err;
     });

@@ -35,7 +35,7 @@
 
 
 
-// object from quiz attemp form 
+// object from quiz attemp form
 {
   question_0: 'Q1A',
   question_1: 'Q3C',
@@ -64,4 +64,29 @@
 //       </ul>
 //     </div>
 //   <% }) %>
+// </div>
+
+
+
+
+// <!-- Quiz 1 -->
+// <div class="quiz-card">
+//   <h2>Quiz 1</h2>
+//   <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+//   <a href="/quiz/1" class="quiz-btn">Take Quiz</a>
+// </div>
+
+
+// <!-- Quiz 2 -->
+// <div class="quiz-card">
+//   <h2>Quiz 2</h2>
+//   <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+//   <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
+// </div>
+
+//  <!-- Quiz 3 -->
+//  <div class="quiz-card">
+//   <h2>Quiz 3</h2>
+//   <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
+//   <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
 // </div>

@@ -30,6 +30,15 @@
   margin-top: 30px;
 }
 
+#copy-quiz-url-btn:hover {
+  background: #0056b3;
+}
+
+
+#copy-quiz-url-btn:active {
+  transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
+
 #submit-quiz-btn {
   margin-top: 50px;
 }
