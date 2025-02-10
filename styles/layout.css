@@ -45,3 +45,11 @@ button {
     font-weight: 700;
     border-radius: 5px;
 }
+
+button:hover {
+  background: #CC7249;
+}
+
+button:active {
+  transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
