@@ -19,7 +19,11 @@ router.get('/:attemptId', (req, res) => {
 
       res.render('results', {
         title: attempt.quiz_title,
+<<<<<<< Updated upstream
         correctAnswersCount: attempt.score
+=======
+        score: attempt.score,
+>>>>>>> Stashed changes
       });
     })
     .catch((err) => {
@@ -30,4 +34,8 @@ router.get('/:attemptId', (req, res) => {
 
 
 
+<<<<<<< Updated upstream
 module.exports = router;
+=======
+module.exports = router;
+>>>>>>> Stashed changes

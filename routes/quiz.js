@@ -77,8 +77,23 @@ router.post('/:id', (req, res) => {
       //MAKE SURE IS CALCULATING THE SCORE
       console.log('Score:', score);
 
-      // Redirect to a results page with the score
-      res.redirect(`/results/${quizId}`);
+      const totalQuestions = questions.length;
+
+      const attempt = {
+        quiz_id: quizId,
+        score: score,
+        totalQuestions: totalQuestions
+      };
+
+      submitAttempt(attempt)
+        .then((newAttempt) => {
+          res.redirect(`/results/${newAttempt.id}`); 
+        })
+        .catch((err) => {
+          console.error('Error sav
+            .ing attempt:', err);
+          res.status(500).send('Error saving attempt');
+        });
     })
     .catch((err) => {
       console.error('Error fetching quiz data:', err);
