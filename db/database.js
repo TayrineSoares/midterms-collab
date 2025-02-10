@@ -202,22 +202,22 @@ const getAttemptDetails = function (attemptId) {
     });
 };
 
-// Retrive Public Quizzes
-const getPublicQuizzes = function () {
+const getAttemptByUrl = function (url) {
   return db
-    .query(`
-      SELECT title, url
-      FROM quizzes
-      WHERE privacy_setting = false; -- Public quizzes
-    `)
+    .query(
+      `SELECT attempts.*, quizzes.title AS quiz_title 
+       FROM attempts
+       JOIN quizzes ON attempts.quiz_id = quizzes.id
+       WHERE attempts.url = $1`, // Wrapped in backticks and fixed closing
+      [url] // Passed as second argument
+    )
     .then((result) => {
-      return result.rows;
+      return result.rows[0]; // Returns first row
     })
     .catch((err) => {
-      throw err;
+      throw err; // Propagates error
     });
 };
-
 
 
 module.exports = {
@@ -233,5 +233,8 @@ module.exports = {
   submitAnswer,
   getAttemptById,
   getAttemptDetails,
-  getPublicQuizzes
+  getPublicQuizzes,
+  getAttemptByUrl
 };
+  
+

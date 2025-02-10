@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { getQuizByUrl, getQuestionsForQuiz, getAnswersForQuiz, submitAttempt } = require('../db/database');
 
+
 // Route to display the quiz details page
 router.get('/:url', (req, res) => {
   const quizUrl = req.params.url;

@@ -1,21 +1,33 @@
 const express = require('express');
 const router = express.Router();
+const {getAttemptByUrl } = require('../db/database');
 
 
-// GET route to show the results page
 router.get('/', (req, res) => {
-  res.render('results'); // Render the results page (replace with your actual results page)
+  res.render('results'); 
+
+
+});
+router.get('/:attemptUrl', (req, res) => {
+  const attemptUrL = req.params.attemptUrl; 
+
+  getAttemptByUrl(attemptUrl)
+    .then((attempt) => {
+      if (!attempt) {
+        return res.status(404).send('No attempts found');
+      }
+
+      res.render('results', {
+        title: attempt.quiz_title,
+        score: attempt.score,
+      });
+    })
+    .catch((err) => {
+      console.error('Error retrieving quiz attempt results:', err.message);
+      res.status(500).send('Server error');
+    });
 });
 
-// POST route for submitting the results
-router.post('/results', (req, res) => {
- // const goBack = req.body.goBack;
 
- // if (goBack === 'backtoresults') {
-  //  res.redirect('/results'); // Redirect to results page
-  //} else if (goBack === 'backhome') {
-   // res.redirect('/'); // Redirect to homepage
-  //}
-});
 
 module.exports = router;
