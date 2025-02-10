@@ -9,7 +9,8 @@ router.get('/', (req, res) => {
 
 });
 router.get('/:attemptUrl', (req, res) => {
-  const attemptUrL = req.params.attemptUrl; 
+  const attemptUrl = req.params.attemptUrl;
+
 
   getAttemptByUrl(attemptUrl)
     .then((attempt) => {
@@ -18,7 +19,7 @@ router.get('/:attemptUrl', (req, res) => {
       }
 
       res.render('results', {
-        title: attempt.quiz_title,
+        quizTitle: attempt.quiz_title,
         score: attempt.score,
       });
     })
