@@ -3,7 +3,7 @@
 <head>
 
   <!--If the title is "Math Quiz", the browser tab will display Creating Quiz: Math Quiz.-->
-  <title>Quiz: <%= title %></title>
+  <title> <%= title %></title>
 
   <!-- Given code -->
   <meta charset="UTF-8" >
@@ -34,7 +34,7 @@
 
   <div class="unique-quiz-main">
     <section class="unique-quiz-title">
-    <h1>Quiz Title: <%= title %></h1>
+    <h1><%= title %></h1>
     <p>Privacy: <%= privacySetting ? 'Private' : 'Public' %></p>
     </section>
 
@@ -63,11 +63,13 @@
 
       <!-- Button to Submit Quiz -->
       <button id="submit-quiz-btn" type="submit" >Finish</button>
+
     </form>
 
 
 <!-- Button to Copy the Quiz URL -->
 <button id="copy-quiz-url-btn" type="button">Copy Quiz URL</button>
+<span id="copyMessage" style="display: none; color: green; margin-left: 10px;">URL Copied!</span>
 </div>
 
   <%- include('partials/_footer.ejs') %>

@@ -14,12 +14,28 @@
 
 
 
+
 $(document).ready(function() {
   // Button click event
   $('#all-public-quizzes-btn'). on('click', () => {
     console.log("Button clicked!");
 
   });
+
+
+  //Copy current URL
+  $("#copy-quiz-url-btn"). on('click', () => {
+    navigator.clipboard.writeText(window.location.href)
+    .then(() =>{
+      //Popup message
+      $("#copyMessage").fadeIn().delay(2000).fadeOut(); // Show message for 2sec
+    })
+    .catch(err => console.error("Failed to copy:", err));
+  });
+
+
 });
+
+
 
 
