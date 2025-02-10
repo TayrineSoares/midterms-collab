@@ -64,17 +64,6 @@ const addAnswers = function (questionId, answers) {
 
 // Quiz Access
 
-const getQuizById = function (quizId) {
-  return db
-    .query(`SELECT * FROM quizzes WHERE id = $1`, [quizId])
-    .then((result) => {
-      return result.rows[0];
-    })
-    .catch((err) => {
-      throw err;
-    })
-};
-
 const getQuizByUrl = (url) => {
   return db
     .query('SELECT * FROM quizzes WHERE url = $1', [url])
@@ -138,64 +127,19 @@ const submitAttempt = function (attempt) {
     });
 };
 
-// Records the answers selected by quiz taker
-const submitAnswer = function (attemptId, questionId, selectedAnswerId) {
-
-  return db
-    .query(`SELECT is_correct FROM answers WHERE id = $1`, [selectedAnswerId])
-    .then((result) => {
-      const isCorrect = result.rows[0] ? result.rows[0].is_correct : false;
-
-      return db
-        .query(
-          `INSERT INTO attempt_answers (attempt_id, question_id, selected_answer_id, is_correct) VALUES ($1, $2, $3, $4) RETURNING *`,
-          [attemptId, questionId, selectedAnswerId, isCorrect]
-        )
-        .then((result) => {
-          return result.rows[0];
-        })
-        .catch((err) => {
-          throw err;
-        });
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
-
 // Quiz Results
 
-// Retrieves quiz attempt by ID
-const getAttemptById = function (attemptId) {
-  return db
-    .query(
-      `SELECT attempts.*, COUNT(attempt_answers.id) AS correct_answers
-       FROM attempts
-       LEFT JOIN attempt_answers ON attempts.id = attempt_answers.attempt_id AND attempt_answers.is_correct = true
-       WHERE attempts.id = $1
-       GROUP BY attempts.id`,
-      [attemptId]
-    )
-    .then((result) => {
-      return result.rows[0]; // Returns attempt details with the count of correct answers
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
-
-// Retrieve Quiz score
-const getAttemptDetails = function (attemptId) {
+const getAttemptByUrl = function (url) {
   return db
     .query(
       `SELECT attempts.*, quizzes.title AS quiz_title
        FROM attempts
        JOIN quizzes ON attempts.quiz_id = quizzes.id
-       WHERE attempts.id = $1`,
-      [attemptId]
+       WHERE attempts.url = $1`,
+      [url]
     )
     .then((result) => {
-      return result.rows[0]; // Returns attempt details with quiz title
+      return result.rows[0];
     })
     .catch((err) => {
       throw err;
@@ -223,13 +167,10 @@ module.exports = {
   addQuiz,
   addQuestions,
   addAnswers,
-  getQuizById,
   getQuizByUrl,
   getQuestionsForQuiz,
   getAnswersForQuiz,
   submitAttempt,
-  submitAnswer,
-  getAttemptById,
-  getAttemptDetails,
-  getPublicQuizzes
+  getPublicQuizzes,
+  getAttemptByUrl
 };

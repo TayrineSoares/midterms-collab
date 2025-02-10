@@ -82,8 +82,9 @@ router.post('/:url', (req, res) => {
       const attempt = {
         quiz_id: quizId,
         score: score,
-        totalQuestions: totalQuestions
+        totalQuestions: totalQuestions,
       };
+      console.log('Attempt Object:', attempt); // Debugging
 
       submitAttempt(attempt)
         .then((newAttempt) => {

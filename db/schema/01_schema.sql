@@ -35,12 +35,3 @@ CREATE TABLE attempts (
   total_questions INTEGER NOT NULL, -- Total number of questions in the quiz
   url TEXT NOT NULL UNIQUE -- Unique URL for the attempt results
 );
-
--- Create attempt_answers table, referencing attempts and questions
-CREATE TABLE attempt_answers (
-  id SERIAL PRIMARY KEY,
-  attempt_id INTEGER REFERENCES attempts(id) ON DELETE CASCADE,
-  question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
-  selected_answer_id INTEGER REFERENCES answers(id) ON DELETE CASCADE,
-  is_correct BOOLEAN NOT NULL -- Whether the selected answer was correct
-);
