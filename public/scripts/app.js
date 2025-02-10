@@ -18,6 +18,7 @@
 $(document).ready(function() {
   // Button click event
   $('#all-public-quizzes-btn'). on('click', () => {
+    window.location.href = '/public'; // Redirect to /public
     console.log("Button clicked!");
 
   });
@@ -35,7 +36,4 @@ $(document).ready(function() {
 
 
 });
-
-
-
 

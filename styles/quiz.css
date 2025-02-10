@@ -34,17 +34,26 @@
   background: #0056b3;
 }
 
-
 #copy-quiz-url-btn:active {
   transform: scale(0.95); /* Slightly shrink the button when clicked */
 }
 
-#submit-quiz-btn {
+#finish-quiz-btn {
   margin-top: 50px;
 }
 
 
+#finish-quiz-btn:hover {
+  background: #CC7249;
+}
+
+#finish-quiz-btn:active {
+  transform: scale(0.95); /* Slightly shrink the button when clicked */
+}
+
+
+
 #copy-quiz-url-btn,
-#submit-quiz-btn {
+#finish-quiz-btn {
   width: 20%;
 }
