@@ -1,7 +1,7 @@
 
 .unique-quiz-main p {
   margin: 0;
-  
+
 }
 .unique-quiz-main h1 {
   margin-bottom: 0;
@@ -17,6 +17,7 @@
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
+  text-align: left;
 
 }
 
@@ -61,5 +62,5 @@ label p {
 
 #copy-url-btn,
 #finish-quiz-btn {
-  width: 20%;
+  width: 400px;
 }
