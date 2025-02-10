@@ -218,6 +218,23 @@ const getPublicQuizzes = function () {
     });
 };
 
+const getAttemptByUrl = function (url) {
+  return db
+    .query(`
+      SELECT attempts.*, quizzes.title AS quiz_title
+       FROM attempts
+       JOIN quizzes ON attempts.quiz_id = quizzes.id
+       WHERE attempts.url = $1`,
+      [url]
+    )
+    .then((result) => {
+      return result.rows[0];
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
+
 module.exports = {
   db,
   addQuiz,
@@ -227,6 +244,7 @@ module.exports = {
   getQuizByUrl,
   getQuestionsForQuiz,
   getAnswersForQuiz,
+  getAttemptByUrl,
   submitAttempt,
   submitAnswer,
   getAttemptById,

@@ -69,19 +69,36 @@
 
 
 
-// <!-- Quiz 1 -->
-// <div class="quiz-card">
-//   <h2>Quiz 1</h2>
-//   <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
-//   <a href="/quiz/1" class="quiz-btn">Take Quiz</a>
-// </div>
 
+// <!-- HARD CODING QUESTIONS FOR LAYOUT PURPOSES-->
+// <section class="all-questions">
 
+//   <!-- First Question -->
+//   <div class="question">
+//     <h3>Question 1: Bacon ipsum dolor amet spare ribs tenderloin doner ground round. </h3>
 
+//     <!-- Answer 1 -->
+//     <!-- ASSUMING THIS IS THE CORRECT ANSWER-->
+//     <div class="answer-options correct-answer">
+//       <input type="radio" class="answer-radio" name="question-1"  value="answer-1" id="answer-1-1" checked/>
+//       <p>T-bone jowl reprehenderit ipsum picanha.</p>
+//     </div>
 
-//  <!-- Quiz 3 -->
-//  <div class="quiz-card">
-//   <h2>Quiz 3</h2>
-//   <!-- CHANGE THIS TO FETCH QUIZ UNIQUE URL-->
-//   <a href="/quiz/2" class="quiz-btn">Take Quiz</a>
-// </div>
+//     <!-- Answer 2 -->
+//     <div class="answer-options">
+//       <input type="radio" class="answer-radio" name="question-1"  value="answer-2" id="answer-1-2" />
+//       <p>T-bone jowl reprehenderit ipsum picanha.</p>
+//     </div>
+
+//     <!-- Answer 3 -->
+//     <div class="answer-options">
+//       <input type="radio" class="answer-radio" name="question-1"  value="answer-3" id="answer-1-3" />
+//       <p>T-bone jowl reprehenderit ipsum picanha.</p>
+//     </div>
+
+//     <!-- Answer 4 -->
+//     <div class="answer-options">
+//       <input type="radio" class="answer-radio" name="question-1"  value="answer-4" id="answer-1-4" />
+//       <p>T-bone jowl reprehenderit ipsum picanha.</p>
+//     </div>
+//   </div>

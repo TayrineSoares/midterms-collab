@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Your results for <%= title %> </title>
+  <title>Your results for <%= quizTitle %> </title>
   <!-- Given code -->
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -37,52 +37,15 @@
   <!-- Main content -->
   <div class="unique-results-main">
     <section class="unique-results-title">
-
-      <!-- MAKE SURE TITLE WORKS -->
-      <h1>Quiz Title: <%= title %> </h1>
-
-
-      <!-- GET SCORE FROM BACK END  -->
-      <h1>Score: <%= score %> </h1>
+      <h1>Quiz: <%= quizTitle %></h1>
+      <h1>Score: <%= score %> / 5</h1>
     </section>
-
-    <!-- HARD CODING QUESTIONS FOR LAYOUT PURPOSES-->
-    <section class="all-questions">
-
-      <!-- First Question -->
-      <div class="question">
-        <h3>Question 1: Bacon ipsum dolor amet spare ribs tenderloin doner ground round. </h3>
-
-        <!-- Answer 1 -->
-        <!-- ASSUMING THIS IS THE CORRECT ANSWER-->
-        <div class="answer-options correct-answer">
-          <input type="radio" class="answer-radio" name="question-1"  value="answer-1" id="answer-1-1" checked/>
-          <p>T-bone jowl reprehenderit ipsum picanha.</p>
-        </div>
-
-        <!-- Answer 2 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-1"  value="answer-2" id="answer-1-2" />
-          <p>T-bone jowl reprehenderit ipsum picanha.</p>
-        </div>
-
-        <!-- Answer 3 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-1"  value="answer-3" id="answer-1-3" />
-          <p>T-bone jowl reprehenderit ipsum picanha.</p>
-        </div>
-
-        <!-- Answer 4 -->
-        <div class="answer-options">
-          <input type="radio" class="answer-radio" name="question-1"  value="answer-4" id="answer-1-4" />
-          <p>T-bone jowl reprehenderit ipsum picanha.</p>
-        </div>
-      </div>
 
 
 
     <!-- Button to Copy the Results URL -->
     <button id="copy-url-btn" type="button">Copy Results URL</button>
+    <span id="copyMessage" style="display: none;">URL Copied!</span>
 
     <!-- Button to go back to the homepage -->
     <button id="homepage-btn" type="button">Back to Homepage</button>
