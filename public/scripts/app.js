@@ -32,7 +32,10 @@ $(document).ready(function() {
 
   });
 
+  $('#quizapp-logo'). on('click', () => {
+    window.location.href = '/'; // Redirect to /
 
+  });
 
 
 
@@ -45,6 +48,8 @@ $(document).ready(function() {
     })
     .catch(err => console.error("Failed to copy:", err));
   });
+
+
 
 
 });
