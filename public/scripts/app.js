@@ -14,7 +14,6 @@
 
 
 
-
 $(document).ready(function() {
 
   // Button click events - Redirect
