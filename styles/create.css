@@ -16,11 +16,14 @@ hr {
 
 .unique-quiz-title {
   /* background-color: pink; */
+  width: 40vw;
+  border: 2px solid black;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  margin-top: 40px;
+  margin: 50px;
 }
 
 .unique-quiz-title h1,
